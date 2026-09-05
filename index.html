@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Hannah ♡</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top,#40233f,#160f1d 65%);color:#fff;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(#ffffff55 1px,transparent 1px);background-size:35px 35px;opacity:.25;animation:drift 18s linear infinite;pointer-events:none}
+@keyframes drift{to{background-position:140px 140px}}.wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.card{width:min(720px,100%);padding:38px 26px;border:1px solid #ffb6df55;border-radius:30px;background:#ffffff0d;backdrop-filter:blur(12px);box-shadow:0 20px 70px #0008;text-align:center}
+.hidden{display:none}.tiny{opacity:.65;font-size:.82rem}.kawaii{font-size:54px;line-height:1;margin:4px}.title{font-size:clamp(2.3rem,8vw,4.7rem);margin:10px 0;background:linear-gradient(90deg,#ffd2ec,#ff8acb,#fff);-webkit-background-clip:text;color:transparent}.subtitle{font-size:1.08rem;line-height:1.7;color:#f5dbe9;max-width:580px;margin:15px auto}
+button{border:0;border-radius:999px;padding:13px 22px;background:linear-gradient(135deg,#ff8dca,#ff5fae);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 25px #ff5fae44;transition:.2s;margin-top:15px}button:hover{transform:translateY(-2px) scale(1.02)}.back{background:#ffffff14;box-shadow:none;margin-right:8px}
+.page{animation:in .45s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.quote{font-size:1.35rem;line-height:1.8;color:#ffe3f2;margin:24px auto;max-width:600px}.box{margin:16px 0;padding:20px;border-radius:22px;background:#00000020;border:1px solid #fff1}.memory{font-size:1.02rem;line-height:1.8;text-align:left}.badge{display:inline-block;padding:7px 12px;border-radius:999px;background:#ff8dca22;border:1px solid #ffb6df55;margin:4px;color:#ffd8ed}.footer{margin-top:25px;opacity:.55;font-size:.8rem}
+#lock input{width:140px;text-align:center;font-size:1.2rem;padding:12px;border-radius:14px;border:1px solid #ffb6df55;background:#ffffff0d;color:#fff;outline:none}.error{color:#ff9bcb;min-height:22px}
+</style>
+</head>
+<body>
+<div class="wrap"><main class="card">
+<section id="lock" class="page">
+<div class="kawaii">🌸</div><div class="tiny">A tiny secret corner of the internet</div>
+<h1 class="title">For Hannah ♡</h1><p class="subtitle">There is a very important scientific experiment inside.<br>It requires exactly one password.</p>
+<input id="pw" type="password" inputmode="numeric" maxlength="3" placeholder="•••"><div class="error" id="err"></div><br>
+<button onclick="unlock()">Enter the secret ✨</button>
+</section>
+
+<section id="p1" class="page hidden">
+<div class="kawaii">🎂</div><h1 class="title">Happy Birthday, Hannah!</h1>
+<p class="subtitle">Shero has officially invaded your browser for a few minutes.<br>Don't worry. No Roblox accounts were harmed.</p>
+<p class="quote">“Some people receive flowers.<br>You received an entire website. Please act impressed.”</p>
+<button onclick="go('p2')">Okay, I'm impressed →</button>
+</section>
+
+<section id="p2" class="page hidden">
+<div class="kawaii">💌</div><h2>A little something from me</h2>
+<p class="quote">Hannah, I know life gets busy, and sometimes our conversations become mostly little messages between everything else going on.</p>
+<p class="subtitle">But honestly, I miss the days when we talked more. I wish we could have more calls, more random conversations, more chances to actually know each other—not just through a chat box.</p>
+<button onclick="go('p3')">Keep reading ♡</button>
+</section>
+
+<section id="p3" class="page hidden">
+<div class="kawaii">☕🌸</div><h2>Things that make me think of you</h2>
+<div class="box"><span class="badge">🌸 Chiikawa</span><span class="badge">☕ Coffee</span><span class="badge">🎮 Roblox</span><span class="badge">💗 Pink</span><span class="badge">🎵 My Flower Girl</span></div>
+<p class="subtitle">The first song I heard from you was <b>“My Flower Girl”</b>.<br>Funny how a song can quietly become attached to a person.</p>
+<button onclick="go('p4')">Next memory →</button>
+</section>
+
+<section id="p4" class="page hidden">
+<div class="kawaii">🎬👻</div><h2>One of my favorite memories</h2>
+<div class="box memory">
+The first time we watched a horror movie together.<br><br>
+It was supposed to be a scary movie… but somehow it became one of those memories that feels warm when I look back at it.<br><br>
+Maybe the movie wasn't the best part. Maybe it was simply getting to share that moment with you.
+</div>
+<button onclick="go('p5')">There is one more thing…</button>
+</section>
+
+<section id="p5" class="page hidden">
+<div class="kawaii">📡💔</div><h2>The internet owes me an apology.</h2>
+<p class="subtitle">If I could travel back in time, I'd go straight to the day I finally confessed.</p>
+<div class="box">
+<p class="quote">And then… my internet decided to disappear.</p>
+<p class="subtitle">Out of every possible moment, it chose <i>that</i> one. Legendary timing. 10/10 betrayal.</p>
+</div>
+<button onclick="go('p6')">One last page →</button>
+</section>
+
+<section id="p6" class="page hidden">
+<div class="kawaii">🌙</div><h2>A tiny poem</h2>
+<p class="quote">
+Distance is a strange little thing,<br>
+it makes a screen feel miles wide.<br>
+But somehow, Hannah,<br>
+you still find a way to stay on my mind.<br><br>
+If time ever gave me one rewind,<br>
+I'd choose that day again—<br>
+not to change what I said,<br>
+just to stay a little longer.
+</p>
+<button onclick="go('p7')">Almost there ♡</button>
+</section>
+
+<section id="p7" class="page hidden">
+<div class="kawaii">🫶</div><h2>What I actually wish for</h2>
+<p class="subtitle">I don't want this distance to make you feel like you're far from me.</p>
+<p class="subtitle">I want to do what I can to keep that feeling alive. I hope we get more calls, more stupid jokes, more random conversations, and more memories that we can look back on later.</p>
+<p class="quote">I hope, somehow, we find our way back to talking like we used to.</p>
+<button onclick="go('p8')">Final page →</button>
+</section>
+
+<section id="p8" class="page hidden">
+<div class="kawaii">🌸🎂🌸</div><h1 class="title">Happy Birthday, Hannah.</h1>
+<p class="subtitle">I hope this year gives you a lot of reasons to smile, plenty of coffee, good Roblox sessions, tiny Chiikawa moments, and people who remind you that you're cared about.</p>
+<p class="quote">And if this website made you smile even a little…<br>then mission accomplished. ♡</p>
+<p><b>— Shero</b></p>
+<div class="footer">Made with questionable amounts of HTML, CSS, and feelings.</div>
+</section>
+</main></div>
+<script>
+const pages=[...document.querySelectorAll('.card section')];
+function unlock(){if(document.getElementById('pw').value==='209'){go('p1')}else{document.getElementById('err').textContent='Wrong password. The website has trust issues 😭'}}
+function go(id){pages.forEach(p=>p.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+</script>
+</body>
+</html>
