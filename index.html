@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Hannah ♡</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 20% 0%,#633b61 0,#241526 45%,#100b14 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.28;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:34px 34px;animation:stars 22s linear infinite}
+@keyframes stars{to{background-position:150px 150px}}
+.wrap{min-height:100vh;display:grid;place-items:center;padding:22px}.card{width:min(760px,100%);min-height:620px;padding:34px 24px;border:1px solid #ffc4e055;border-radius:32px;background:#ffffff0d;backdrop-filter:blur(16px);box-shadow:0 25px 90px #0009;display:flex;align-items:center;justify-content:center;text-align:center}
+.page{width:100%;animation:enter .45s ease}.hidden{display:none}@keyframes enter{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.k{font-size:56px;line-height:1}.tiny{opacity:.58;font-size:.82rem}.title{font-size:clamp(2.5rem,9vw,5.2rem);line-height:1;margin:15px 0;background:linear-gradient(90deg,#fff0fa,#ffb5df,#fff);-webkit-background-clip:text;color:transparent}
+h2{font-size:clamp(1.8rem,6vw,2.7rem);margin:12px 0}.sub{max-width:610px;margin:15px auto;line-height:1.8;color:#f5ddea;font-size:1.05rem}.quote{max-width:620px;margin:22px auto;line-height:1.9;font-size:1.25rem;color:#ffe7f3}
+.box{max-width:650px;margin:20px auto;padding:20px;border:1px solid #fff2;border-radius:24px;background:#0002}.memory{text-align:left;line-height:1.8}
+.badge{display:inline-block;margin:5px;padding:9px 13px;border-radius:999px;background:#ff8acb20;border:1px solid #ffc4e044}
+button{margin:9px 5px 0;border:0;border-radius:999px;padding:13px 21px;color:#fff;background:linear-gradient(135deg,#ff91ce,#ff5da9);font-weight:800;font-size:.96rem;cursor:pointer;box-shadow:0 8px 25px #ff5da944;transition:.2s}
+button:hover{transform:translateY(-2px) scale(1.025)}button.alt{background:#ffffff12;box-shadow:none;border:1px solid #fff2}
+input{width:150px;padding:13px;border-radius:15px;border:1px solid #ffc4e055;background:#ffffff0d;color:#fff;text-align:center;font-size:1.25rem;outline:0}.err{height:24px;color:#ffacd3;margin-top:8px}
+.footer{margin-top:28px;opacity:.48;font-size:.78rem}
+.choice{display:inline-block}
+</style>
+</head>
+<body>
+<div class="wrap"><main class="card">
+
+<section id="lock" class="page">
+<div class="k">🌸</div><div class="tiny">A tiny secret corner of the internet</div>
+<h1 class="title">For Hannah ♡</h1>
+<p class="sub">There is something waiting for you in here.<br>But first, the website demands its tiny password. Very dramatic.</p>
+<input id="pw" type="password" inputmode="numeric" maxlength="3" placeholder="•••">
+<div class="err" id="err"></div>
+<button onclick="unlock()">Unlock the surprise ✨</button>
+</section>
+
+<section id="p1" class="page hidden">
+<div class="k">🎂✨</div><h1 class="title">Happy Birthday, Hannah!</h1>
+<p class="sub">Shero has officially taken over your browser.</p>
+<p class="quote">“No presents were harmed in the making of this website.”</p>
+<p class="tiny">Actually… there was one victim: my free time. 😭</p>
+<button onclick="go('p2')">Okay, continue →</button>
+<button class="alt" onclick="go('lock')">I suddenly became shy 😭</button>
+</section>
+
+<section id="p2" class="page hidden">
+<div class="k">💌</div><h2>A message from Shero</h2>
+<p class="quote">Hannah, I know you are really busy, and sometimes most of what we have is just little messages between everything else going on.</p>
+<p class="sub">But honestly, I miss talking to you like we used to. I hope we can have more calls, more random conversations, more stupid jokes, and more chances to know each other even better.</p>
+<p class="sub">I don't want distance to make you feel far away from me. I want to keep finding little ways to make that distance feel smaller.</p>
+<div class="box"><div class="k" style="font-size:42px">🌸</div><b>Chiikawa has entered the chat.</b><p class="sub">“Hannah… keep reading. Shero definitely overthought this.”</p></div>
+<button onclick="go('p3')">Continue before I get emotional 😂</button>
+</section>
+
+<section id="p3" class="page hidden">
+<div class="k">☕🌹🌊</div><h2>Things that make me think of you</h2>
+<div class="box"><span class="badge">🌹 Flowers</span><span class="badge">🌊 The Sea</span><span class="badge">☕ Coffee</span><span class="badge">🎮 Roblox</span><span class="badge">💗 Pink</span><span class="badge">🎵 My Flower Girl</span></div>
+<p class="sub">The first song I heard from you was <b>“My Flower Girl”</b>.<br>It's funny how a song can quietly become connected to a person.</p>
+<button onclick="go('p4')">Next memory →</button>
+<button class="alt" onclick="go('p2')">Wait, I need coffee first ☕</button>
+</section>
+
+<section id="p4" class="page hidden">
+<div class="k">🎬👻</div><h2>One of my favorite memories</h2>
+<div class="box memory">
+The first time we watched a horror movie together.<br><br>
+It was supposed to be scary… but somehow it became one of those memories that feels warm whenever I remember it.<br><br>
+Maybe the movie wasn't even the best part. Maybe it was simply getting to share that moment with you.
+</div>
+<button onclick="go('p5')">There is one more thing… 👀</button>
+<button class="alt" onclick="go('p3')">Replay the memory 🎬</button>
+</section>
+
+<section id="p5" class="page hidden">
+<div class="k">📡😭</div><h2>The Wi‑Fi owes me an apology.</h2>
+<p class="sub">If I could travel back in time, I'd go straight to the day I confessed.</p>
+<div class="box">
+<p class="quote">And then… my internet decided to disappear.</p>
+<p class="sub">Out of every possible moment, it chose <b>THAT</b> one. 😭<br>My Wi‑Fi really looked at me and said: “Character development.”</p>
+<p class="tiny">Official rating: ⭐ 0/10 internet service. Would not recommend.</p>
+</div>
+<button onclick="go('p6')">Blame the Wi‑Fi →</button>
+<button class="alt" onclick="go('p4')">I need emotional support 😂</button>
+</section>
+
+<section id="p6" class="page hidden">
+<div class="k">🌙✨</div><h2>A tiny poem</h2>
+<p class="tiny">(I am not a poet. Please lower your expectations 😂)</p>
+<p class="quote">
+The distance may stretch the miles,<br>
+but never the place you have in my mind.<br>
+Your voice, your laugh, your little smiles,<br>
+somehow make the distance less unkind.<br><br>
+And if I got one rewind,<br>
+I'd go back without hesitation,<br>
+not to change a single feeling,<br>
+just to steal a little more time with you.
+</p>
+<button onclick="go('p7')">Okay poet, next page 😂 →</button>
+<button class="alt" onclick="go('p5')">I blame the Wi‑Fi again</button>
+</section>
+
+<section id="p7" class="page hidden">
+<div class="k">🫶🎀</div><h2>Things I love about you</h2>
+<div class="box memory">
+<p><b>Your voice.</b> Ahhh… that voice. 😭</p>
+<p><b>Your eyes.</b> They have absolutely no business being that distracting.</p>
+<p><b>Your laugh.</b> One of those sounds I could hear way too many times and still want more.</p>
+<p><b>Your sweet way of being.</b> Your style, your way of talking, and all those little things that make you, you.</p>
+</div>
+<p class="sub">Honestly, I could keep going, but then this birthday website would become a full Netflix series.</p>
+<button onclick="go('p8')">Final boss → ❤️</button>
+<button class="alt" onclick="go('p6')">Read the poem again, poet</button>
+</section>
+
+<section id="p8" class="page hidden">
+<div class="k">🌸🎂🌸</div><h1 class="title">Happy Birthday, Hannah.</h1>
+<p class="sub">I hope this year gives you countless reasons to smile, plenty of coffee, fun Roblox sessions, and moments that make you genuinely happy.</p>
+<div class="box">
+<p class="quote">I love you more than this tiny website can fit into one screen.</p>
+<p class="sub">And hopefully, someday soon, distance will stop being a thing between us. I hope we get more calls, more laughs, and more memories we actually get to live together.</p>
+<p class="sub"><b>Maybe one day, all these “I wish” moments will simply become memories we laugh about.</b> ❤️</p>
+</div>
+<p class="quote">Until then… I'm here, cheering for you from my side of the screen.</p>
+<p><b>— Shero</b></p>
+<div class="footer">Made with questionable amounts of HTML, feelings, and absolutely zero Wi‑Fi during the confession.</div>
+<button class="alt" onclick="go('p1')">Start the emotional damage again 😂</button>
+</section>
+
+</main></div>
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function go(id){pages.forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})}
+function unlock(){const v=document.getElementById('pw').value;if(v==='209'){document.getElementById('err').textContent='';go('p1')}else{document.getElementById('err').textContent='Wrong password 😭 Try again.'}}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+</script>
+</body>
+</html>
