@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Hannah's 19th Birthday — A Tiny Universe</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+:root{
+ --ink:#493f58;--soft:#fff8fb;--pink:#f5b8ca;--rose:#e98fab;--lav:#cfc4ee;
+ --blue:#a9dce7;--cream:#fff0cc;--mint:#bfe7d2;--shadow:0 14px 40px rgba(73,63,88,.16);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#19162b;color:var(--ink);font-family:Nunito,sans-serif}
+button{font:inherit;color:inherit;border:0;cursor:pointer}
+#app{position:fixed;inset:0;overflow:hidden}
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+.scene.active{display:block}
+.bg{position:absolute;inset:0}
+.hand{font-family:"Baloo 2",cursive}
+.card{background:rgba(255,250,253,.88);border:2px solid rgba(255,255,255,.85);box-shadow:var(--shadow);border-radius:28px}
+.btn{padding:13px 20px;border-radius:18px;background:#fff;border:2px solid rgba(73,63,88,.12);box-shadow:0 7px 0 rgba(73,63,88,.10);font-weight:800;transition:.18s transform,.18s box-shadow}
+.btn:active{transform:translateY(5px);box-shadow:0 2px 0 rgba(73,63,88,.1)}
+.btn.primary{background:var(--pink)}
+.btn.soft{background:#fff8df}
+.btn.blue{background:var(--blue)}
+.btn.lav{background:var(--lav)}
+.nav{position:absolute;left:18px;right:18px;bottom:17px;display:flex;justify-content:space-between;z-index:20;pointer-events:none}
+.nav>*{pointer-events:auto}
+.topbar{position:absolute;top:14px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;z-index:30}
+.pill{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);padding:8px 13px;border-radius:99px;font-weight:800;font-size:12px}
+#toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%) translateY(20px);background:#fff8fb;border:2px solid #fff;box-shadow:var(--shadow);padding:11px 16px;border-radius:18px;z-index:100;opacity:0;pointer-events:none;transition:.3s;max-width:86%;text-align:center;font-weight:800}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#progress{position:fixed;left:50%;top:9px;transform:translateX(-50%);width:min(340px,52vw);height:7px;background:rgba(255,255,255,.25);border-radius:99px;z-index:60}
+#progress i{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:.5s}
+
+/* drawings */
+.stars{position:absolute;inset:0}
+.star{position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;opacity:.75;animation:twinkle 2.4s infinite alternate}
+@keyframes twinkle{to{opacity:.15;transform:scale(.55)}}
+.cloud{position:absolute;width:140px;height:45px;background:#fff8fb;border-radius:50px;opacity:.8}
+.cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}
+.cloud:before{width:65px;height:65px;left:25px;top:-30px}.cloud:after{width:55px;height:55px;right:22px;top:-22px}
+.flower{position:absolute;width:70px;height:100px}.stem{position:absolute;width:4px;height:65px;background:#79a982;left:34px;top:34px;border-radius:5px}.leaf{position:absolute;width:28px;height:14px;background:#9ac8a4;border-radius:100% 0;top:63px;left:13px;transform:rotate(25deg)}.leaf.r{left:36px;transform:scaleX(-1) rotate(25deg)}.petals{position:absolute;left:17px;top:7px;width:38px;height:38px;background:#f3aec5;border-radius:50%;box-shadow:18px 7px 0 #f3aec5,-12px 7px 0 #f3aec5,3px -12px 0 #f3aec5,4px 18px 0 #f3aec5}.petals b{position:absolute;width:14px;height:14px;border-radius:50%;background:#ffd67d;left:12px;top:12px}
+
+/* mascot */
+.mascot{position:absolute;width:116px;height:105px;z-index:8;animation:bob 3s ease-in-out infinite}
+.mascot .body{position:absolute;width:94px;height:78px;left:11px;top:23px;background:#fffafc;border:3px solid #5a5262;border-radius:48% 52% 43% 47%;box-shadow:0 8px 0 rgba(73,63,88,.08)}
+.mascot .ear{position:absolute;width:28px;height:38px;background:#fffafc;border:3px solid #5a5262;border-radius:60% 60% 35% 35%;top:1px}.ear.l{left:20px;transform:rotate(-18deg)}.ear.r{right:20px;transform:rotate(18deg)}
+.eye{position:absolute;width:6px;height:8px;background:#5a5262;border-radius:50%;top:54px}.eye.l{left:38px}.eye.r{right:38px}
+.mouth{position:absolute;width:10px;height:6px;border-bottom:3px solid #5a5262;border-radius:50%;left:42px;top:67px}
+.blush{position:absolute;width:17px;height:7px;background:#f5b8ca;border-radius:50%;top:66px;opacity:.8}.blush.l{left:21px}.blush.r{right:21px}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* shero */
+.shero{position:absolute;width:130px;height:180px;z-index:7}
+.shero .head{position:absolute;left:29px;top:3px;width:74px;height:74px;background:#f2c9a8;border:3px solid #554b58;border-radius:50% 48% 52% 50%;z-index:2}
+.shero .hair{position:absolute;left:23px;top:0;width:86px;height:50px;background:#3c3542;border-radius:55% 55% 35% 35%;z-index:3;transform:rotate(-2deg)}
+.shero .hair:after{content:"";position:absolute;right:-6px;top:17px;width:28px;height:45px;background:#3c3542;border-radius:50%}
+.shero .eye{top:38px;width:5px;height:7px}.shero .eye.l{left:51px}.shero .eye.r{left:76px}
+.shero .smile{position:absolute;left:56px;top:51px;width:16px;height:8px;border-bottom:2px solid #554b58;border-radius:50%;z-index:4}
+.shero .body{position:absolute;left:27px;top:67px;width:80px;height:105px;background:#b8a8d9;border:3px solid #554b58;border-radius:30px 30px 20px 20px}
+.shero .arm{position:absolute;width:28px;height:67px;background:#f2c9a8;border:3px solid #554b58;border-radius:30px;top:78px;z-index:1}.shero .arm.l{left:12px;transform:rotate(15deg)}.shero .arm.r{right:12px;transform:rotate(-15deg)}
+.shero .leg{position:absolute;width:28px;height:52px;background:#4b4550;border:3px solid #554b58;border-radius:15px;top:160px}.shero .leg.l{left:36px}.shero .leg.r{left:70px}
+
+/* Scene 1 */
+#s1{background:radial-gradient(circle at 50% 35%,#50446d,#201c34 65%,#151321)}
+#s1 .moon{position:absolute;width:120px;height:120px;border-radius:50%;background:#fff4d8;right:12%;top:11%;box-shadow:0 0 60px rgba(255,244,216,.35)}
+#s1 .shero{left:23%;bottom:13%}#s1 .mascot{right:22%;bottom:16%;transform:scale(.9)}
+.dialogue{position:absolute;left:50%;top:10%;transform:translateX(-50%);width:min(520px,88vw);text-align:center;color:#fff}
+.dialogue h1{font-size:clamp(30px,6vw,58px);margin:0 0 8px}.dialogue p{font-size:17px;line-height:1.5;opacity:.9}
+.chat{position:absolute;bottom:32%;left:50%;transform:translateX(-50%);width:min(450px,82vw);background:#fff8fb;border-radius:24px;padding:14px 18px;text-align:center;box-shadow:var(--shadow);font-weight:800}
+.chat:after{content:"";position:absolute;bottom:-12px;left:48%;border:12px solid transparent;border-top-color:#fff8fb;border-bottom:0}
+
+/* room */
+#s2{background:linear-gradient(#dceff4,#fff1e5)}
+.roomfloor{position:absolute;bottom:0;left:0;right:0;height:28%;background:#e8d4c9;transform:skewY(-3deg);transform-origin:left}
+.window{position:absolute;left:9%;top:13%;width:28%;height:30%;border:12px solid #fff;border-radius:18px;background:linear-gradient(#a9dce7 0 65%,#9bcba0 66%);box-shadow:var(--shadow)}
+.window .sun{position:absolute;width:35px;height:35px;border-radius:50%;background:#ffd878;right:15%;top:15%}
+.poster{position:absolute;right:8%;top:17%;width:150px;height:105px;background:#fff4d8;border:8px solid #fff;transform:rotate(5deg);box-shadow:var(--shadow);text-align:center;padding:14px;font-weight:800}
+.desk{position:absolute;left:43%;bottom:23%;width:38%;height:12%;background:#b98868;border-radius:15px}.desk:before{content:"";position:absolute;left:10%;right:10%;bottom:-65px;height:65px;border-left:9px solid #8d624e;border-right:9px solid #8d624e}
+.coffee{position:absolute;width:54px;height:38px;background:#fff;border:4px solid #635866;border-radius:8px 8px 16px 16px;left:52%;bottom:34%}.coffee:after{content:"";position:absolute;right:-18px;top:8px;width:18px;height:18px;border:4px solid #635866;border-left:0;border-radius:0 12px 12px 0}.steam{position:absolute;left:18px;top:-35px;width:12px;height:30px;border-left:3px dashed #fff;transform:skewX(10deg);opacity:.8}
+
+/* map */
+#s3{background:#dff2e7}
+.map{position:absolute;inset:9% 5% 10%;border-radius:35px;background:#f7f0d8;border:5px dashed #c7b99c;box-shadow:var(--shadow);overflow:hidden}
+.path{position:absolute;left:8%;right:8%;top:50%;height:7px;background:#d5bfa8;transform:rotate(-8deg);border-radius:99px}
+.node{position:absolute;width:105px;height:105px;border-radius:50%;background:#fff;border:4px solid #8c7c9e;box-shadow:0 9px 0 rgba(73,63,88,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;z-index:3}.node small{font-size:10px;margin-top:4px}.node.locked{filter:grayscale(1);opacity:.45}.node.done{background:#dff3e7}.n1{left:8%;top:18%}.n2{left:36%;top:42%}.n3{right:8%;top:16%}.n4{left:17%;bottom:7%}.n5{right:20%;bottom:5%}.n6{right:3%;top:52%}
+.map-title{position:absolute;top:10%;left:50%;transform:translateX(-50%);text-align:center;z-index:5}.map-title h2{font-size:clamp(26px,5vw,45px);margin:0}.map-title p{margin:0}
+
+/* quiz */
+#s4{background:#f7e9f1}.quizbox{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(650px,90vw);padding:28px;text-align:center}.quizbox h2{font-size:32px;margin:0 0 10px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.answer{padding:14px;border-radius:18px;background:#fff;border:2px solid #eadde6;font-weight:800}.answer:hover{transform:translateY(-2px)}.answer.correct{background:#cdebd7}.answer.wrong{background:#f7ccd8}.qbar{height:9px;background:#eadde6;border-radius:99px;margin:17px 0}.qbar i{display:block;height:100%;background:#c9b7e9;border-radius:99px;width:25%}
+
+/* horror */
+#s5{background:#181728;color:#fff}.film{position:absolute;inset:10% 6% 13%;background:#2b283a;border:4px solid #645b73;border-radius:28px;overflow:hidden;box-shadow:0 0 0 10px rgba(255,255,255,.04)}.film .screen{position:absolute;left:7%;right:7%;top:10%;bottom:18%;background:radial-gradient(circle,#555069,#201e2b 70%);border:8px solid #111;border-radius:14px}.film .door{position:absolute;width:100px;height:150px;left:50%;top:32%;transform:translateX(-50%);background:#17141e;border:4px solid #08070b}.film .light{position:absolute;width:70px;height:70px;border-radius:50%;background:#f9e8bd;right:10%;top:15%;box-shadow:0 0 55px #f9e8bd;animation:flicker 1.4s infinite alternate}.film .caption{position:absolute;bottom:5%;left:0;right:0;text-align:center;font-weight:800;font-size:18px}.film .shadow{position:absolute;left:49%;top:42%;width:18px;height:55px;background:#111;border-radius:50% 50% 35% 35%;animation:peek 3s infinite}.film .eye2{position:absolute;left:51%;top:48%;width:7px;height:7px;background:#fff;border-radius:50%;box-shadow:13px 0 #fff}
+@keyframes flicker{to{opacity:.55;transform:scale(.94)}}@keyframes peek{0%,70%{transform:translateX(-20px)}100%{transform:translateX(12px)}}
+.scarebtn{position:absolute;bottom:7%;left:50%;transform:translateX(-50%)}
+
+/* wifi */
+#s6{background:linear-gradient(#d8eff4,#fce8dc)}.router{position:absolute;left:50%;top:39%;transform:translate(-50%,-50%);width:220px;height:110px;background:#fff;border:4px solid #5a5262;border-radius:25px;box-shadow:var(--shadow)}.router:before,.router:after{content:"";position:absolute;width:12px;height:90px;background:#5a5262;top:-75px;border-radius:10px}.router:before{left:67px;transform:rotate(-12deg)}.router:after{right:67px;transform:rotate(12deg)}.lights{position:absolute;left:35px;right:35px;bottom:22px;display:flex;gap:12px;justify-content:center}.led{width:12px;height:12px;background:#e88ca9;border-radius:50%;box-shadow:0 0 12px #e88ca9}.cables{position:absolute;left:50%;top:55%;transform:translateX(-50%);display:flex;gap:12px}.cable{width:85px;height:48px;border-radius:14px;background:#fff;border:3px solid #5a5262;font-weight:900}.glitch{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(255,255,255,.05) 6px 7px);pointer-events:none;opacity:0}.glitch.on{opacity:1;animation:gl 1s steps(3) infinite}@keyframes gl{50%{transform:translate(5px,-2px);filter:hue-rotate(60deg)}}
+
+/* loved things */
+#s7{background:#fff1d9}.lovegrid{position:absolute;inset:13% 7% 13%;display:grid;grid-template-columns:repeat(4,1fr);gap:15px;align-items:center}.loveitem{height:180px;background:#fff;border:3px solid #eadfe2;border-radius:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;transition:.2s}.loveitem:hover{transform:translateY(-8px) rotate(-1deg)}.icon{width:75px;height:75px;margin-bottom:10px;position:relative}.icon.heart:before{content:"";position:absolute;width:55px;height:55px;background:#efa0ba;transform:rotate(45deg);left:10px;top:10px;border-radius:12px}.icon.heart:after{content:"";position:absolute;width:35px;height:35px;background:#fff;transform:rotate(45deg);left:20px;top:20px;border-radius:10px}.eyeicon:before,.eyeicon:after{content:"";position:absolute;top:25px;width:29px;height:19px;border:4px solid #5a5262;border-radius:50%}.eyeicon:before{left:4px}.eyeicon:after{right:4px}.voiceicon{border:5px solid #5a5262;border-radius:50%;}.voiceicon:after{content:"";position:absolute;width:25px;height:35px;border:4px solid #5a5262;border-left:0;border-radius:0 20px 20px 0;right:-20px;top:18px}.laughicon:before{content:"";position:absolute;width:60px;height:30px;border-bottom:6px solid #5a5262;border-radius:50%;left:8px;top:20px}.styleicon{border:4px solid #5a5262;border-radius:15px;transform:rotate(-8deg)}.styleicon:after{content:"";position:absolute;left:13px;right:13px;top:25px;height:4px;background:#5a5262;box-shadow:0 15px #5a5262}
+
+/* garden */
+#s8{background:linear-gradient(#cde9e2,#f6e9cf)}.garden{position:absolute;inset:0}.ground{position:absolute;bottom:0;width:100%;height:35%;background:#a8cda4;border-radius:50% 50% 0 0/25% 25% 0 0}.bud{position:absolute;width:70px;height:100px;cursor:pointer;z-index:4}.bud .st{position:absolute;left:34px;top:32px;width:4px;height:70px;background:#60906c}.bud .b{position:absolute;left:21px;top:12px;width:30px;height:30px;border-radius:50%;background:#eaa1bc;transition:.35s}.bud.bloom .b{box-shadow:16px 7px 0 #eaa1bc,-16px 7px 0 #eaa1bc,0 -16px 0 #eaa1bc,0 16px 0 #eaa1bc;background:#ffd77f}.gardenmsg{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:min(500px,84vw);text-align:center}.gardenmsg h2{font-size:34px;margin:0}.bud:nth-of-type(1){left:12%;bottom:17%}.bud:nth-of-type(2){left:29%;bottom:11%}.bud:nth-of-type(3){left:46%;bottom:19%}.bud:nth-of-type(4){left:62%;bottom:10%}.bud:nth-of-type(5){right:11%;bottom:18%}.bud:nth-of-type(6){left:19%;bottom:30%}.bud:nth-of-type(7){right:23%;bottom:31%}
+
+/* coffee */
+#s9{background:linear-gradient(#f8e8ce,#fff7ec)}.cupbig{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:210px;height:145px;background:#fff;border:5px solid #5a5262;border-radius:20px 20px 55px 55px}.cupbig:after{content:"";position:absolute;right:-50px;top:34px;width:55px;height:60px;border:5px solid #5a5262;border-left:0;border-radius:0 40px 40px 0}.coffeelevel{position:absolute;left:15px;right:15px;top:17px;height:45px;background:#9a6c55;border-radius:50%}.bean{position:absolute;width:24px;height:31px;border-radius:50%;background:#6e4b3e;transform:rotate(30deg);cursor:pointer;box-shadow:0 5px 0 rgba(73,63,88,.12);animation:fall 4s linear forwards}.bean:after{content:"";position:absolute;width:3px;height:20px;background:#b98c77;left:10px;top:5px;transform:rotate(-25deg)}@keyframes fall{from{top:-50px}to{top:100vh}}.coffeestatus{position:absolute;top:14%;left:50%;transform:translateX(-50%);text-align:center}.coffeestatus h2{font-size:36px;margin:0}.meter{width:min(420px,78vw);height:16px;background:#eaded4;border-radius:99px;margin:12px auto}.meter i{display:block;height:100%;width:0;background:#a87c65;border-radius:99px;transition:.2s}
+
+/* memory */
+#s10{background:#e9e3f6}.album{position:absolute;inset:12% 7% 12%;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.photo{background:#fff;padding:12px 12px 28px;border-radius:8px;box-shadow:var(--shadow);transform:rotate(-2deg);position:relative}.photo:nth-child(2){transform:rotate(2deg)}.photo:nth-child(3){transform:rotate(-1deg)}.photo .pic{height:150px;border-radius:5px;background:linear-gradient(#b9dfe8,#d6c3a8);position:relative;overflow:hidden}.photo .pic:before{content:"";position:absolute;width:80px;height:80px;border-radius:50%;background:#fff0b7;right:15px;top:15px}.photo .pic:after{content:"";position:absolute;width:160px;height:80px;background:#8ab79c;border-radius:50% 50% 0 0;left:-10px;bottom:-25px}.photo p{margin:9px 4px 0;text-align:center;font-weight:800}
+
+/* distance */
+#s11{background:#e9f4f4}.ocean{position:absolute;bottom:0;left:0;right:0;height:47%;background:linear-gradient(#8fd0db,#6bb7ca)}.wave{position:absolute;left:-5%;right:-5%;height:34px;background:#eaf8f8;border-radius:50%;animation:wave 4s ease-in-out infinite}.w1{top:8%}.w2{top:35%;animation-delay:-1s}.w3{top:62%;animation-delay:-2s}@keyframes wave{50%{transform:translateX(4%)}}
+.sun2{position:absolute;width:85px;height:85px;background:#ffd67d;border-radius:50%;right:13%;top:14%;box-shadow:0 0 45px rgba(255,214,125,.6)}.island{position:absolute;width:160px;height:65px;background:#9cc79b;border-radius:50% 50% 0 0;bottom:43%;left:17%}.island2{right:13%;left:auto;bottom:43%;width:130px}.distanceheart{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;background:#fff8fb;border:4px solid #e9a2ba;display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 0 45px rgba(233,162,186,.4);animation:pulse 1.7s infinite}@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.08)}}
+
+/* gallery / future */
+#s12{background:#f5eadf}.choices{position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:min(750px,90vw);display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.future{padding:22px;background:#fff;border-radius:25px;box-shadow:var(--shadow);text-align:center;min-height:180px}.future h3{margin:8px 0}.future p{font-size:14px;line-height:1.45}.future .draw{height:65px;position:relative}.future .draw:before{content:"";position:absolute;left:50%;top:8px;transform:translateX(-50%);width:55px;height:55px;border-radius:50%;background:#ffd67d;border:3px solid #5a5262}
+
+/* letter */
+#s13{background:radial-gradient(circle at 50% 30%,#fff8df,#efdde6)}.envelope{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);width:min(560px,82vw);height:300px;background:#e9a7bb;border-radius:20px;box-shadow:var(--shadow);cursor:pointer}.envelope:before{content:"";position:absolute;inset:0;background:#f6bfd0;clip-path:polygon(0 0,50% 58%,100% 0);border-radius:20px 20px 0 0}.seal{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:62px;height:62px;background:#ffd77f;border:4px solid #9b6f5e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;z-index:4}.letterpaper{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%) scale(.1);width:min(580px,88vw);height:min(75vh,560px);background:#fffdf3;border-radius:10px;padding:30px;box-shadow:var(--shadow);opacity:0;transition:.8s;z-index:5;overflow:auto}.letterpaper.open{opacity:1;transform:translate(-50%,-50%) scale(1)}.letterpaper h2{text-align:center;font-size:30px;margin:0 0 15px}.letterpaper p{font-size:15px;line-height:1.7;margin:10px 0}.closeletter{position:absolute;right:10px;top:10px}
+
+/* final */
+#s14{background:radial-gradient(circle at 50% 20%,#433a60,#171526 75%);color:#fff}.constellation{position:absolute;inset:0}.cstar{position:absolute;width:7px;height:7px;background:#fff;border-radius:50%;box-shadow:0 0 15px #fff}.line{position:absolute;height:2px;background:rgba(255,255,255,.5);transform-origin:left center}.finalmsg{position:absolute;left:50%;top:28%;transform:translateX(-50%);width:min(700px,88vw);text-align:center}.finalmsg h1{font-size:clamp(36px,7vw,68px);margin:0 0 10px}.finalmsg p{font-size:18px;line-height:1.65;opacity:.9}.finalmascot{left:50%;bottom:13%;transform:translateX(-50%)}.finalmascot .mascot{position:relative;right:auto;bottom:auto}.sig{font-family:"Baloo 2";font-size:23px;margin-top:18px}
+
+/* secret */
+#s15{background:#202035;color:#fff}.safe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(470px,88vw);padding:28px;text-align:center;background:#302d47;border:2px solid #625b78;border-radius:30px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.key{padding:14px;background:#47415e;border-radius:14px;color:#fff;font-weight:900}.code{height:48px;background:#181625;border-radius:13px;margin:15px 0;display:flex;align-items:center;justify-content:center;letter-spacing:8px;font-size:22px}.secret-reveal{display:none;margin-top:15px;padding:15px;background:#3b3555;border-radius:18px;line-height:1.5}.secret-reveal.show{display:block}
+
+@media(max-width:650px){
+ .answers{grid-template-columns:1fr}.lovegrid{grid-template-columns:1fr 1fr;inset:16% 6% 14%;gap:10px}.loveitem{height:145px}.icon{width:55px;height:55px}.album{grid-template-columns:1fr 1fr;overflow:auto;padding-bottom:15px}.photo .pic{height:120px}.choices{grid-template-columns:1fr;top:54%;max-height:65%;overflow:auto;padding:5px}.future{min-height:120px;padding:15px}.node{width:78px;height:78px;font-size:12px}.n1{left:5%;top:22%}.n2{left:34%;top:44%}.n3{right:5%;top:22%}.n4{left:9%;bottom:8%}.n5{right:18%;bottom:7%}.n6{right:1%;top:54%}.poster{width:110px;height:80px;font-size:11px}.window{width:33%;height:25%}.desk{left:35%;width:47%}
+}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="progress"><i></i></div>
+
+<!-- 1 -->
+<section class="scene active" id="s1">
+ <div class="bg"></div><div class="stars" id="stars1"></div><div class="moon"></div>
+ <div class="dialogue">
+  <h1 class="hand">A tiny universe is waiting…</h1>
+  <p>There is one very important person who has absolutely no idea what is about to happen.</p>
+ </div>
+ <div class="chat" id="introChat">Shero: “Okay… is she here yet?”</div>
+ <div class="shero"><div class="hair"></div><div class="head"><span class="eye l"></span><span class="eye r"></span><span class="smile"></span></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+ <div class="mascot"><div class="ear l"></div><div class="ear r"></div><div class="body"></div><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span><span class="blush l"></span><span class="blush r"></span></div>
+ <div class="nav"><button class="btn primary" onclick="introNext()">Open the tiny universe</button><button class="btn" onclick="sound()">Sound</button></div>
+</section>
+
+<!-- 2 -->
+<section class="scene" id="s2">
+ <div class="window"><div class="sun"></div></div><div class="cloud" style="left:50%;top:12%;transform:scale(.7)"></div>
+ <div class="poster">HAPPY<br>BIRTHDAY<br>HANNAH</div><div class="roomfloor"></div><div class="desk"></div>
+ <div class="coffee"><div class="steam"></div></div>
+ <div class="shero" style="left:43%;bottom:21%;transform:scale(.72)"></div>
+ <div class="mascot" style="right:12%;bottom:25%"></div>
+ <div class="card" style="position:absolute;top:13%;left:50%;transform:translateX(-50%);padding:14px 20px;text-align:center;width:min(430px,82vw)">
+  <div class="hand" style="font-size:27px">Okay… don't judge the effort Shero put into this.</div>
+  <div>There are balloons. There are flowers. There is a suspicious amount of coffee.</div>
+ </div>
+ <div class="nav"><button class="btn primary" onclick="go(3)">Begin the journey →</button></div>
+</section>
+
+<!-- 3 -->
+<section class="scene" id="s3">
+ <div class="map-title"><h2 class="hand">Hannah's Birthday Map</h2><p>Six little places. No boring paths.</p></div>
+ <div class="map"><div class="path"></div>
+  <button class="node n1" onclick="mapGo(4)">QUIZ<small>tiny investigator</small></button>
+  <button class="node n2 locked" id="map2" onclick="mapGo(5)">CINEMA<small>unlock me</small></button>
+  <button class="node n3 locked" id="map3" onclick="mapGo(6)">WI-FI<small>danger zone</small></button>
+  <button class="node n4 locked" id="map4" onclick="mapGo(7)">HEART<small>things I love</small></button>
+  <button class="node n5 locked" id="map5" onclick="mapGo(8)">GARDEN<small>seven flowers</small></button>
+  <button class="node n6 locked" id="map6" onclick="mapGo(9)">COFFEE<small>important research</small></button>
+ </div>
+ <div class="nav"><button class="btn" onclick="go(2)">← Room</button></div>
+</section>
+
+<!-- 4 -->
+<section class="scene" id="s4">
+ <div class="quizbox card">
+  <div class="pill">TINY INVESTIGATOR TEST</div>
+  <h2 class="hand" id="qtitle">Question 1</h2><p id="qtext">Which drink has a special place in Hannah's universe?</p>
+  <div class="qbar"><i id="qbar"></i></div><div class="answers" id="answers"></div>
+ </div>
+</section>
+
+<!-- 5 -->
+<section class="scene" id="s5">
+ <div class="film"><div class="screen"><div class="light"></div><div class="door"></div><div class="shadow"></div><div class="eye2"></div></div><div class="caption" id="horrorCaption">THE FIRST HORROR MOVIE: cute memory or terrible idea?</div></div>
+ <button class="btn scarebtn primary" onclick="horror()">Press if you're brave.</button>
+</section>
+
+<!-- 6 -->
+<section class="scene" id="s6">
+ <div class="glitch" id="glitch"></div>
+ <div style="position:absolute;top:11%;left:50%;transform:translateX(-50%);text-align:center;width:90%">
+  <h2 class="hand" style="font-size:40px;margin:0">THE WI-FI INCIDENT</h2><p>One confession. One internet connection. One legendary betrayal.</p>
+ </div>
+ <div class="router"><div class="lights"><span class="led"></span><span class="led"></span><span class="led"></span></div></div>
+ <div class="cables"><button class="cable" onclick="fixWifi(this)">FIX 1</button><button class="cable" onclick="fixWifi(this)">FIX 2</button><button class="cable" onclick="fixWifi(this)">FIX 3</button></div>
+ <div class="nav"><button class="btn" onclick="go(3)">← Map</button></div>
+</section>
+
+<!-- 7 -->
+<section class="scene" id="s7">
+ <div style="position:absolute;top:9%;left:50%;transform:translateX(-50%);text-align:center;width:90%"><h2 class="hand" style="font-size:40px;margin:0">Things I Love About You</h2><p>Tap the little drawings. I tried to fit the feelings into a screen.</p></div>
+ <div class="lovegrid">
+  <button class="loveitem" onclick="love(0)"><span class="icon voiceicon"></span>YOUR VOICE</button>
+  <button class="loveitem" onclick="love(1)"><span class="icon eyeicon"></span>YOUR EYES</button>
+  <button class="loveitem" onclick="love(2)"><span class="icon laughicon"></span>YOUR LAUGH</button>
+  <button class="loveitem" onclick="love(3)"><span class="icon styleicon"></span>YOUR STYLE</button>
+ </div>
+</section>
+
+<!-- 8 -->
+<section class="scene" id="s8">
+ <div class="gardenmsg"><h2 class="hand">A Garden of Little Things</h2><p>Seven flowers are hiding tiny pieces of a message. Find them all.</p></div>
+ <div class="ground"></div>
+ <div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div><div class="bud"><div class="st"></div><div class="b"></div></div>
+ <div class="nav"><button class="btn" onclick="go(3)">← Map</button></div>
+</section>
+
+<!-- 9 -->
+<section class="scene" id="s9">
+ <div class="coffeestatus"><h2 class="hand">Coffee Emergency</h2><p>Catch 8 beans before the universe runs out of caffeine.</p><div class="meter"><i id="coffeemeter"></i></div><b id="coffeecount">0 / 8</b></div>
+ <div class="cupbig"><div class="coffeelevel"></div></div>
+ <div class="nav"><button class="btn" onclick="go(3)">← Map</button></div>
+</section>
+
+<!-- 10 -->
+<section class="scene" id="s10">
+ <div style="position:absolute;top:8%;left:50%;transform:translateX(-50%);text-align:center;width:90%"><h2 class="hand" style="font-size:38px;margin:0">Memory Album</h2><p>Some memories don't need perfect pictures to be worth keeping.</p></div>
+ <div class="album">
+  <div class="photo"><div class="pic"></div><p>The first horror movie we watched together.</p></div>
+  <div class="photo"><div class="pic" style="background:linear-gradient(#d7edf1,#b5d39e)"></div><p>The kind of memory that somehow became sweet.</p></div>
+  <div class="photo"><div class="pic" style="background:linear-gradient(#f7d9e5,#e8c7a7)"></div><p>Small moments. Big place in my heart.</p></div>
+ </div>
+ <div class="nav"><button class="btn primary" onclick="go(11)">Next memory →</button></div>
+</section>
+
+<!-- 11 -->
+<section class="scene" id="s11">
+ <div class="sun2"></div><div class="ocean"><div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div></div>
+ <div class="island"></div><div class="island island2"></div><div class="distanceheart">2</div>
+ <div style="position:absolute;top:13%;left:50%;transform:translateX(-50%);text-align:center;width:min(650px,90vw)">
+  <h2 class="hand" style="font-size:43px;margin:0">The Distance Scene</h2>
+  <p style="font-size:17px;line-height:1.6">Different countries can make a map feel huge. But I never want that distance to make you feel like I'm far away.</p>
+ </div>
+ <button class="btn primary" style="position:absolute;left:50%;top:48%;transform:translateX(-50%)" onclick="distance()">Make the distance smaller</button>
+</section>
+
+<!-- 12 -->
+<section class="scene" id="s12">
+ <div style="position:absolute;top:9%;left:50%;transform:translateX(-50%);text-align:center;width:90%"><h2 class="hand" style="font-size:39px;margin:0">Future Simulator</h2><p>Pick a tiny future scene. The universe will tell you what it thinks.</p></div>
+ <div class="choices">
+  <button class="future" onclick="future(0)"><div class="draw"></div><h3>More calls</h3><p>Long conversations, random stories, and finally enough time to know each other even better.</p></button>
+  <button class="future" onclick="future(1)"><div class="draw"></div><h3>Play together</h3><p>Roblox chaos, Genshin adventures, and someone blaming the internet.</p></button>
+  <button class="future" onclick="future(2)"><div class="draw"></div><h3>No screen between us</h3><p>The day distance stops being the main character.</p></button>
+ </div>
+</section>
+
+<!-- 13 -->
+<section class="scene" id="s13">
+ <div style="position:absolute;top:10%;left:50%;transform:translateX(-50%);text-align:center;width:90%"><h2 class="hand" style="font-size:38px;margin:0">A Letter That Took Too Long</h2><p>Tap the envelope. Read it slowly.</p></div>
+ <div class="envelope" onclick="openLetter()"><div class="seal">H</div></div>
+ <div class="letterpaper" id="letter">
+  <button class="btn closeletter" onclick="closeLetter(event)">×</button>
+  <h2 class="hand">For Hannah, on 19</h2>
+  <p>Happy birthday, Hannah.</p>
+  <p>I don't really know how to fit everything I feel into a few lines, so I made you an entire little universe instead.</p>
+  <p>There are so many things that remind me of you: flowers, the sea, coffee, little moments that somehow stay in my head longer than they should.</p>
+  <p>I still remember the first song I heard from you — <b>My Flower Girl</b>. I remember the first horror movie we watched together too. It was supposed to be scary, but somehow it became one of those memories I want to keep.</p>
+  <p>And then there was the day I confessed. My internet disconnected. Of all possible moments, it chose <i>that</i> one. I still wish I could go back and do it without the Wi-Fi deciding to become the villain.</p>
+  <p>I know you're busy, and I know we don't always get the calls or conversations we used to. I just hope we get more of those moments again — more time, more stories, more chances to know each other better.</p>
+  <p>I love your voice. Your eyes. Your laugh. Your style. The little things that make you you.</p>
+  <p>And even with countries between us, I want to keep doing everything I can so you never have to feel like you're alone on the other side of the map.</p>
+  <p>Maybe one day we'll look back at this tiny website and laugh at how dramatic Shero was.</p>
+  <p>Until then, keep being Hannah. Keep being you.</p>
+  <p style="text-align:center;font-weight:900">Happy 19th birthday.<br>— Shero</p>
+ </div>
+</section>
+
+<!-- 14 -->
+<section class="scene" id="s14">
+ <div class="stars" id="stars14"></div>
+ <div class="finalmsg"><h1 class="hand">Until distance feels a little smaller…</h1><p>Thank you for every conversation, every laugh, every weird little memory, and every moment that made you feel closer than a map says you are.</p><div class="sig">There is still so much story left.</div></div>
+ <div class="finalmascot"><div class="mascot"><div class="ear l"></div><div class="ear r"></div><div class="body"></div><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span><span class="blush l"></span><span class="blush r"></span></div></div>
+ <div class="nav"><button class="btn primary" onclick="go(15)">Open the secret file</button><button class="btn" onclick="go(3)">Replay journey</button></div>
+</section>
+
+<!-- 15 -->
+<section class="scene" id="s15">
+ <div class="safe">
+  <div class="pill">CLASSIFIED BIRTHDAY FILE</div>
+  <h2 class="hand" style="font-size:34px;margin:8px 0">One last tiny secret.</h2>
+  <p>The file is protected by a three-digit code hidden in the journey.</p>
+  <div class="code" id="code">___</div>
+  <div class="keypad">
+   <button class="key" onclick="key(1)">1</button><button class="key" onclick="key(2)">2</button><button class="key" onclick="key(3)">3</button>
+   <button class="key" onclick="key(4)">4</button><button class="key" onclick="key(5)">5</button><button class="key" onclick="key(6)">6</button>
+   <button class="key" onclick="key(7)">7</button><button class="key" onclick="key(8)">8</button><button class="key" onclick="key(9)">9</button>
+   <button class="key" onclick="key(0)" style="grid-column:2">0</button>
+  </div>
+  <div class="secret-reveal" id="secret">You found it.<br><br>Somewhere in the future, I hope there is a day where the map doesn't matter anymore — because you're here.<br><br><b>Happy birthday, Hannah.</b></div>
+  <div style="margin-top:14px"><button class="btn" onclick="go(14)">Back to the stars</button></div>
+ </div>
+</section>
+</div>
+<div id="toast"></div>
+
+<script>
+const total=15;
+let current=1, introStep=0, quizIndex=0, wifi=0, flowers=0, coffee=0, codeInput="";
+const unlocked={5:false,6:false,7:false,8:false,9:false};
+const quiz=[
+ ["Which drink belongs in Hannah's universe?","Coffee","Tea","Juice","Water",0],
+ ["Which game world does Shero play with Hannah?","Roblox","Chess","Tetris","Solitaire",0],
+ ["What was the first song Shero heard from Hannah?","My Flower Girl","Stand By Me","Moonlight","Daydream",0],
+ ["What became a sweet memory even though it was scary?","A horror movie","A math test","A thunderstorm","A cooking show",0]
+];
+function scene(n){return document.getElementById("s"+n)}
+function go(n){
+ document.querySelectorAll(".scene").forEach(x=>x.classList.remove("active"));
+ scene(n).classList.add("active"); current=n;
+ document.querySelector("#progress i").style.width=((n-1)/(total-1)*100)+"%";
+ if(n===3) refreshMap();
+ if(n===4) renderQuiz();
+ if(n===9) startCoffee();
+ if(n===14) makeStars("stars14",55);
+ if(n===1) makeStars("stars1",45);
+}
+function toast(t){
+ const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");
+ setTimeout(()=>e.classList.remove("show"),1900);
+}
+function beep(freq=520,dur=.07){
+ try{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();
+ o.frequency.value=freq;o.type="sine";g.gain.setValueAtTime(.04,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur);
+ o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur)}catch(e){}
+}
+function sound(){beep(660,.1);toast("Tiny universe sound: ON. The actual song can be opened from your music app.");}
+function introNext(){
+ const box=document.getElementById("introChat");
+ introStep++;
+ const lines=[
+  "Tiny mascot: “She better be ready.”",
+  "Shero: “I made a whole journey.”",
+  "Tiny mascot: “You made a WHAT?”",
+  "Shero: “A birthday universe.”",
+  "Tiny mascot: “Hannah… this is your fault. You inspired the chaos.”"
+ ];
+ if(introStep<lines.length){box.textContent=lines[introStep];beep(500+introStep*80,.08)}
+ else go(2);
+}
+function makeStars(id,count){
+ const root=document.getElementById(id); if(!root||root.dataset.made)return;
+ for(let i=0;i<count;i++){let s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*2+"s";root.appendChild(s)}
+ root.dataset.made="1";
+}
+makeStars("stars1",45);
+function refreshMap(){
+ const ids=["map2","map3","map4","map5","map6"];
+ ids.forEach((id,i)=>{let e=document.getElementById(id);e.classList.toggle("locked",!unlocked[i+0]);});
+}
+function mapGo(n){
+ if(n===4)go(4);
+ else if(n===5&&unlocked[5])go(5);
+ else if(n===6&&unlocked[6])go(6);
+ else if(n===7&&unlocked[7])go(7);
+ else if(n===8&&unlocked[8])go(8);
+ else if(n===9&&unlocked[9])go(9);
+ else toast("Locked! Complete the earlier little adventure first.");
+}
+function unlock(k){unlocked[k]=true;refreshMap()}
+function renderQuiz(){
+ const q=quiz[quizIndex], title=document.getElementById("qtitle"), text=document.getElementById("qtext"), ans=document.getElementById("answers");
+ title.textContent="Question "+(quizIndex+1)+" of "+quiz.length;text.textContent=q[0];
+ document.getElementById("qbar").style.width=((quizIndex+1)/quiz.length*100)+"%";ans.innerHTML="";
+ for(let i=1;i<=4;i++){let b=document.createElement("button");b.className="answer";b.textContent=q[i];b.onclick=()=>answer(i-1,b);ans.appendChild(b)}
+}
+function answer(i,b){
+ const q=quiz[quizIndex]; if(i===q[5]){b.classList.add("correct");beep(760,.1);toast("Correct. Hannah knowledge: suspiciously high.");}
+ else {b.classList.add("wrong");beep(250,.12);toast("Wrong. The tiny mascot is judging you politely.");}
+ setTimeout(()=>{
+  quizIndex++;
+  if(quizIndex<quiz.length)renderQuiz();
+  else{unlock(5);toast("Quiz complete. CINEMA unlocked.");setTimeout(()=>go(3),700)}
+ },650);
+}
+function horror(){
+ document.getElementById("horrorCaption").textContent="Okay. That was the first horror movie. Somehow… still one of the sweetest memories.";
+ beep(210,.15);setTimeout(()=>beep(480,.08),180);unlock(6);setTimeout(()=>go(3),1200);
+}
+function fixWifi(b){
+ if(b.disabled)return;b.disabled=true;b.textContent="FIXED";wifi++;beep(400+wifi*120,.08);
+ document.getElementById("glitch").classList.add("on");
+ if(wifi===3){setTimeout(()=>{document.getElementById("glitch").classList.remove("on");unlock(7);toast("Wi-Fi boss defeated. Confession survived.");setTimeout(()=>go(3),900)},600)}
+}
+function love(i){
+ const m=[
+ "Your voice has this unfair ability to stay in my head. In the best way.",
+ "Your eyes. I don't even need a poetic explanation. They just got me.",
+ "Your laugh is one of those sounds I wish I could hear more often.",
+ "Your style. You somehow make being yourself look effortless."
+ ];
+ toast(m[i]);beep(600+i*90,.09);
+ if(i===3){unlock(8);setTimeout(()=>go(3),900)}
+}
+document.querySelectorAll("#s8 .bud").forEach((b,i)=>b.addEventListener("click",()=>{
+ if(b.classList.contains("bloom"))return;b.classList.add("bloom");flowers++;beep(520+flowers*35,.07);
+ const msgs=["Flowers.","The sea.","Coffee.","Your voice.","Your laugh.","Your eyes.","And you.",""];
+ toast(msgs[flowers-1]||"...");
+ if(flowers===7){unlock(9);setTimeout(()=>{toast("Garden complete. Coffee emergency unlocked.");go(3)},900)}
+}));
+let coffeeTimer;
+function startCoffee(){
+ coffee=0;document.getElementById("coffeecount").textContent="0 / 8";document.getElementById("coffeemeter").style.width="0%";
+ clearInterval(coffeeTimer);
+ coffeeTimer=setInterval(()=>{
+  if(current!==9){clearInterval(coffeeTimer);return}
+  let b=document.createElement("button");b.className="bean";b.style.left=(Math.random()*90+5)+"%";b.onclick=()=>{if(b.dataset.hit)return;b.dataset.hit=1;b.remove();coffee++;document.getElementById("coffeecount").textContent=coffee+" / 8";document.getElementById("coffeemeter").style.width=(coffee/8*100)+"%";beep(500+coffee*30,.05);if(coffee>=8){clearInterval(coffeeTimer);toast("Coffee mission complete. Humanity is safe.");setTimeout(()=>go(10),1000)}};scene(9).appendChild(b);
+  setTimeout(()=>b.remove(),4100);
+ },700);
+}
+function distance(){
+ document.querySelector(".distanceheart").textContent="♥";beep(720,.2);toast("A little smaller. That's the point.");unlock(10);setTimeout(()=>go(12),900)
+}
+function future(i){
+ const m=["The universe predicts more calls, more stories, and fewer “sorry I was busy” moments.","The universe predicts legendary Roblox chaos and Genshin adventures.","The universe predicts a day where you won't need a screen to feel close."];
+ toast(m[i]);beep(560+i*100,.1);
+}
+function openLetter(){document.getElementById("letter").classList.add("open");beep(620,.12)}
+function closeLetter(e){e.stopPropagation();document.getElementById("letter").classList.remove("open")}
+function key(n){
+ if(codeInput.length>=3)codeInput="";
+ codeInput+=n;document.getElementById("code").textContent=codeInput.padEnd(3,"_");
+ beep(400+n*30,.05);
+ if(codeInput.length===3){
+  if(codeInput==="209"){document.getElementById("secret").classList.add("show");beep(900,.18);toast("Access granted.");}
+  else{toast("Nope. The universe whispers: try again.");setTimeout(()=>{codeInput="";document.getElementById("code").textContent="___"},500)}
+ }
+}
+</script>
+</body>
+</html>
