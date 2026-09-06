@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hannah's Birthday Adventure ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap');
+:root{--pink:#ff79ad;--deep:#5b2949;--cream:#fffaf7;--lav:#c9b1e8;--blue:#a8ddec;--gold:#ffd66e}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;scroll-behavior:smooth}
+body{font-family:Fredoka,system-ui,sans-serif;color:var(--deep);background:#160f24;overflow-x:hidden}
+button{font:inherit}.hide{display:none!important}
+#stars{position:fixed;inset:0;z-index:0;background:
+radial-gradient(circle at 20% 20%,#fff 0 1px,transparent 2px),
+radial-gradient(circle at 80% 30%,#fff 0 1px,transparent 2px),
+radial-gradient(circle at 40% 70%,#fff 0 1px,transparent 2px),#160f24;background-size:160px 140px,210px 180px,240px 190px;opacity:.7}
+.app{position:relative;z-index:2;min-height:100vh}.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{width:min(980px,94vw);background:#fffdfdf5;border:2px solid #ffffffaa;border-radius:34px;box-shadow:0 25px 80px #0007;overflow:hidden}
+.intro{min-height:620px;position:relative;padding:55px 7%;background:linear-gradient(135deg,#ffc5dd,#d9c5ef 48%,#a7dbe7)}
+.glow{position:absolute;width:360px;height:360px;border-radius:50%;background:#fff8;filter:blur(45px);right:-100px;top:-100px}
+.logo{font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.7}
+h1{font-size:clamp(52px,9vw,100px);line-height:.9;margin:20px 0 15px;color:#54213f}.script{font-family:Pacifico,cursive;color:#d95591}
+.lead{font-size:20px;line-height:1.65;max-width:570px}.primary{border:0;border-radius:18px;padding:15px 24px;background:#ef669e;color:#fff;font-weight:700;box-shadow:0 12px 25px #d34d8c35;cursor:pointer}
+.input{padding:15px 18px;border-radius:16px;border:2px solid #edbad0;width:190px;text-align:center;font-size:18px;outline:0}.small{font-size:13px;opacity:.72}
+.mascot{width:210px;height:210px;filter:drop-shadow(0 15px 10px #4b294333)}
+.heroMascot{position:absolute;right:5%;bottom:4%;width:290px;height:290px}.speech{position:absolute;right:26%;bottom:37%;width:260px;background:#fff;border:3px solid #5b3c4c;border-radius:24px;padding:14px;box-shadow:0 10px 30px #4c304422}.speech:after{content:"";position:absolute;right:-16px;bottom:18px;border-width:10px 0 10px 16px;border-style:solid;border-color:transparent transparent transparent #5b3c4c}
+.top{position:fixed;z-index:50;top:12px;left:50%;transform:translateX(-50%);width:min(1000px,94vw);background:#ffffffec;backdrop-filter:blur(12px);border:1px solid #fff;border-radius:20px;padding:8px 12px;display:flex;align-items:center;gap:6px;box-shadow:0 8px 25px #0002}.top b{margin-right:auto;color:#c44f88}.top span{font-size:12px;padding:5px 9px;border-radius:10px;background:#ffe3ee}.progress{height:6px;background:#f2d7e4;position:fixed;top:0;left:0;z-index:60;width:100%}.progress i{display:block;height:100%;width:0;background:#ef6fa5}
+.stage{padding-top:65px;background:linear-gradient(#fff8fb,#f6ecf8)}.inner{width:min(1000px,94vw);margin:auto}.title{text-align:center;font-size:42px;margin:15px 0;color:#d45c95}.subtitle{text-align:center;max-width:680px;margin:0 auto 25px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.tile{background:#fff;border:2px solid #efd0df;border-radius:22px;padding:18px;box-shadow:0 10px 25px #70475b10}.tile h3{margin:5px 0;color:#c65388}.tile p{line-height:1.55;font-size:14px}.choice{width:100%;border:0;background:#f0e5f7;color:#654b73;border-radius:14px;padding:11px;margin:5px 0;cursor:pointer}.choice:hover{background:#ffd7e8;transform:translateY(-1px)}
+.love{background:linear-gradient(135deg,#fff0f6,#f0e7fb)}.bigline{text-align:center;font-size:22px;line-height:1.7;max-width:760px;margin:20px auto}
+.scene{min-height:620px;display:flex;align-items:center;justify-content:center;padding:75px 0;background:linear-gradient(160deg,#f4d3e2,#d6c9eb 50%,#b8dfeb)}
+.sceneBox{width:min(1000px,94vw);position:relative;min-height:500px;border-radius:32px;overflow:hidden;background:linear-gradient(#eeb1cf,#f5d2df 45%,#78a6bd);box-shadow:0 25px 70px #533d5840}.moon{position:absolute;right:12%;top:10%;font-size:55px}.window{position:absolute;right:8%;top:12%;width:43%;height:48%;border:14px solid #ffffffaa;background:linear-gradient(#f2aac8,#e5bfd5 45%,#688ca8)}.floor{position:absolute;bottom:0;left:0;right:0;height:27%;background:#b77f72}.blanket{position:absolute;right:0;bottom:13%;width:55%;height:19%;background:#fff9;border-radius:35px 0 0 0}.sceneMascot{position:absolute;left:5%;bottom:4%;width:270px;height:270px}.sceneText{position:absolute;left:6%;top:9%;width:48%;z-index:4}.sceneText h2{font-size:48px;margin:0 0 12px}.sceneText p{font-size:17px;line-height:1.65}
+.memoryCard{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}.memoryArt{min-height:300px;border-radius:25px;background:linear-gradient(135deg,#202344,#7a536f,#eaa8c4);display:flex;align-items:center;justify-content:center;font-size:110px}
+.ocean{background:linear-gradient(#f6b8d1 0 25%,#6ec0d7 55%,#266c88 100%);padding:55px 20px;min-height:480px;position:relative;overflow:hidden}.sun{font-size:70px;text-align:center}.wave{font-size:70px;white-space:nowrap;opacity:.7;position:absolute;bottom:35px;left:-30px;right:-30px}.oceanMascot{display:block;margin:20px auto;width:190px;height:190px}
+.envelope{width:min(700px,92%);margin:auto;background:#fff;border:2px dashed #e9a8c7;border-radius:24px;padding:28px;text-align:center;line-height:1.8;box-shadow:0 15px 35px #613b5017}.seal{font-size:55px}.ending{background:linear-gradient(135deg,#ffd6e7,#fff3f8,#dff5fb)}
+.fireworks{font-size:40px;text-align:center;letter-spacing:15px}.endMascot{display:block;width:220px;height:220px;margin:auto}
+.toast{position:fixed;left:50%;bottom:20px;z-index:100;transform:translate(-50%,130px);transition:.35s;background:#fff;border:2px solid #efb4cd;border-radius:18px;padding:13px 18px;box-shadow:0 12px 35px #0003;text-align:center}.toast.on{transform:translate(-50%,0)}
+footer{text-align:center;padding:35px;background:#fff3f8;color:#94677f}
+@media(max-width:760px){.heroMascot{width:210px;height:210px;right:0}.speech{right:18%;bottom:29%;width:210px;font-size:13px}.grid{grid-template-columns:1fr 1fr}.memoryCard{grid-template-columns:1fr}.sceneBox{min-height:650px}.sceneText{width:88%;top:7%}.sceneText h2{font-size:40px}.window{top:43%;width:58%;height:37%}.sceneMascot{width:200px;height:200px}.top{overflow:auto;white-space:nowrap}.top a{display:none}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.intro{padding:40px 7%;min-height:700px}.lead{font-size:17px}.heroMascot{width:175px;height:175px}.speech{left:25%;right:auto;bottom:19%;width:190px}.title{font-size:34px}.stage{padding-top:60px}.top b{font-size:12px}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="progress"><i id="bar"></i></div>
+<div id="top" class="top hide"><b>Hannah's Birthday Adventure ♡</b><span id="count">1 / 7</span><span>209 🔐</span></div>
+<div class="app">
+
+<section id="gate" class="screen">
+<div class="card intro" style="text-align:center">
+<div class="glow"></div><div class="logo">A tiny secret corner of the internet</div>
+<h1>For <span class="script">Hannah</span> ♡</h1>
+<p class="lead" style="margin:0 auto">There are 7 little rooms waiting for you. A few questions. A few memories. A lot of feelings. And one tiny mascot who has absolutely no idea what he's doing. 😂</p>
+<div style="margin:25px 0"><input id="pw" class="input" maxlength="3" inputmode="numeric" placeholder="Password"><button class="primary" onclick="unlock()">Open it ✨</button></div>
+<p id="err" class="small"></p>
+<div style="margin-top:30px"><span style="font-size:45px">🌷 ✦ ☕ 🌊</span></div>
+</div></section>
+
+<main id="main" class="hide">
+<section class="screen stage" id="home"><div class="inner">
+<div style="position:relative;background:linear-gradient(135deg,#ffd0e3,#e7d3f0,#bfe3ed);border-radius:30px;min-height:590px;overflow:hidden;padding:55px 6%;box-shadow:0 20px 60px #63405420">
+<div class="sceneText"><div class="logo">Chapter 1 · Birthday mode</div><h1>Happy Birthday,<br><span class="script">Hannah!</span> 💗</h1><p>You deserve a day full of good moments, easy laughs, coffee, and absolutely zero Wi‑Fi betrayal.</p><button class="primary" onclick="next('questions')">Start the adventure →</button></div>
+<div class="window" style="top:9%;right:5%;height:55%;width:40%"></div><div class="bed"></div>
+<div class="heroMascot"><svg viewBox="0 0 220 220" class="mascotSvg"><ellipse cx="110" cy="199" rx="68" ry="9" fill="#000" opacity=".08"/><path d="M48 104C43 54 67 22 105 28C145 19 178 53 172 105L165 164C161 190 140 201 110 201C78 201 56 188 53 163Z" fill="#fffdfd" stroke="#4e3544" stroke-width="6"/><path d="M57 73C42 52 54 27 78 25C86 13 106 17 112 31C126 14 150 21 151 39C174 39 182 61 166 77" fill="#fffdfd" stroke="#4e3544" stroke-width="6" stroke-linejoin="round"/><circle cx="82" cy="105" r="6" fill="#3d2835"/><circle cx="138" cy="105" r="6" fill="#3d2835"/><circle cx="69" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><circle cx="151" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><path d="M102 117q8 8 16 0M108 117v12" fill="none" stroke="#4e3544" stroke-width="4" stroke-linecap="round"/><path d="M73 151q37-24 74 0v30q-37 18-74 0z" fill="#f26f9f" stroke="#4e3544" stroke-width="5"/></svg></div><div class="speech" id="speech">Hi Hannah! I was told this is your birthday. I brought a very important mission. 🐹✨</div>
+</div></div></section>
+
+<section class="screen stage" id="questions"><div class="inner"><h2 class="title">Chapter 2 · The tiny quiz 🧩</h2><p class="subtitle">Pick whatever feels right. The mascot will judge your choices professionally.</p>
+<div class="grid">
+<div class="tile"><h3>01 · Shero's free time</h3><p>When you're not texting, what is he probably doing?</p><button class="choice" onclick="reply('Correct. Overthinking detected. 😭')">Overthinking 😂</button><button class="choice" onclick="reply('He wishes. Sleep is currently unavailable. 😂')">Sleeping</button><button class="choice" onclick="reply('A suspiciously accurate answer. 👀')">Missing conversations</button></div>
+<div class="tile"><h3>02 · Next time</h3><p>What should there be more of?</p><button class="choice" onclick="reply('Calls unlocked! 📞✨')">Long calls</button><button class="choice" onclick="reply('Random conversations are elite. 💗')">Random chats</button><button class="choice" onclick="reply('All three. Obviously. 😂')">Everything</button></div>
+<div class="tile"><h3>03 · Birthday mood</h3><p>Choose your official mood.</p><button class="choice" onclick="reply('Main character energy. Approved. ✨')">Main character ✨</button><button class="choice" onclick="reply('Cozy mode activated. 🧸')">Cozy 🧸</button><button class="choice" onclick="reply('CHAOS. I knew it. 😂')">Chaos 😂</button></div>
+</div><div style="text-align:center;margin-top:25px"><button class="primary" onclick="next('favorites')">I survived →</button></div></div></section>
+
+<section class="screen stage" id="favorites"><div class="inner"><h2 class="title">Chapter 3 · Things that remind me of you 🌷</h2><p class="subtitle">No Chiikawa here. Just the little things that somehow became connected to you.</p>
+<div class="grid">
+<div class="tile" style="text-align:center"><div style="font-size:75px">🌹</div><h3>Flowers</h3><p>Soft, pretty, and they make a normal moment feel a little more special.</p></div>
+<div class="tile" style="text-align:center"><div style="font-size:75px">🌊</div><h3>The Sea</h3><p>Peaceful from far away, but with a whole world underneath.</p></div>
+<div class="tile" style="text-align:center"><div style="font-size:75px">☕</div><h3>Coffee</h3><p>At this point coffee has become a supporting character.</p></div>
+<div class="tile" style="text-align:center"><div style="font-size:75px">🎮</div><h3>Roblox</h3><p>Because apparently there is always another game to try.</p></div>
+<div class="tile" style="text-align:center"><div style="font-size:75px">🎀</div><h3>A little pink</h3><p>Just enough to make everything feel cute without trying too hard.</p></div>
+<div class="tile" style="text-align:center"><div style="font-size:75px">🎵</div><h3>My Flower Girl</h3><p>The first song I heard from you. So of course it belongs here.</p></div>
+</div><div style="text-align:center;margin-top:25px"><button class="primary" onclick="next('room')">Next room →</button></div></div></section>
+
+<section class="screen" id="room"><div class="sceneBox"><div class="moon">☾ ✦</div><div class="floor"></div><div class="window"></div><div class="blanket"></div>
+<div class="sceneText"><div class="logo">Chapter 4 · A memory</div><h2>The first horror movie 🎬</h2><p>It sounds simple, but it's one of those moments I still remember. Watching the same movie and reacting to it together somehow turned an ordinary night into a memory worth keeping.</p><button class="primary" onclick="reply('I rate this memory 10/10. Please add it to the museum. 🏆')">Ask the mascot 🐹</button></div><div class="sceneMascot"><svg viewBox="0 0 220 220" class="mascotSvg"><ellipse cx="110" cy="199" rx="68" ry="9" fill="#000" opacity=".08"/><path d="M48 104C43 54 67 22 105 28C145 19 178 53 172 105L165 164C161 190 140 201 110 201C78 201 56 188 53 163Z" fill="#fffdfd" stroke="#4e3544" stroke-width="6"/><path d="M57 73C42 52 54 27 78 25C86 13 106 17 112 31C126 14 150 21 151 39C174 39 182 61 166 77" fill="#fffdfd" stroke="#4e3544" stroke-width="6" stroke-linejoin="round"/><circle cx="82" cy="105" r="6" fill="#3d2835"/><circle cx="138" cy="105" r="6" fill="#3d2835"/><circle cx="69" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><circle cx="151" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><path d="M102 117q8 8 16 0M108 117v12" fill="none" stroke="#4e3544" stroke-width="4" stroke-linecap="round"/><path d="M73 151q37-24 74 0v30q-37 18-74 0z" fill="#f26f9f" stroke="#4e3544" stroke-width="5"/></svg></div></div></section>
+
+<section class="screen stage" id="wifi"><div class="inner"><div class="memoryCard"><div class="tile"><div style="font-size:65px">📶💥</div><h2 class="title" style="text-align:left">Chapter 5 · The Wi‑Fi incident</h2><p>On the day I confessed, the internet decided that was the perfect moment to disappear.</p><p><b>Wi‑Fi:</b> “Character development.”</p><p><b>Shero:</b> “PLEASE COME BACK.” 😭</p><button class="primary" onclick="reply('I am still blaming the router. 😭📶')">Official verdict</button></div><div style="text-align:center"><svg viewBox="0 0 220 220" class="mascotSvg"><ellipse cx="110" cy="199" rx="68" ry="9" fill="#000" opacity=".08"/><path d="M48 104C43 54 67 22 105 28C145 19 178 53 172 105L165 164C161 190 140 201 110 201C78 201 56 188 53 163Z" fill="#fffdfd" stroke="#4e3544" stroke-width="6"/><path d="M57 73C42 52 54 27 78 25C86 13 106 17 112 31C126 14 150 21 151 39C174 39 182 61 166 77" fill="#fffdfd" stroke="#4e3544" stroke-width="6" stroke-linejoin="round"/><circle cx="82" cy="105" r="6" fill="#3d2835"/><circle cx="138" cy="105" r="6" fill="#3d2835"/><circle cx="69" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><circle cx="151" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><path d="M102 117q8 8 16 0M108 117v12" fill="none" stroke="#4e3544" stroke-width="4" stroke-linecap="round"/><path d="M73 151q37-24 74 0v30q-37 18-74 0z" fill="#f26f9f" stroke="#4e3544" stroke-width="5"/></svg></div></div><div style="text-align:center;margin-top:22px"><button class="primary" onclick="next('love')">Continue →</button></div></div></section>
+
+<section class="screen stage love" id="love"><div class="inner"><h2 class="title">Chapter 6 · The things I love about you 💗</h2><p class="bigline">Your voice. Your eyes. Your laugh. Your sweet way of being. The little things that make you <i>you</i>.</p>
+<div class="grid"><div class="tile"><h3>🎧 Your voice</h3><p>Ahhh… that voice. 😭</p></div><div class="tile"><h3>👀 Your eyes</h3><p>They have their own effect.</p></div><div class="tile"><h3>😂 Your laugh</h3><p>It makes ordinary moments better.</p></div><div class="tile"><h3>🌷 Your sweet way</h3><p>The little things in how you talk and exist in the world.</p></div><div class="tile"><h3>✨ Your vibe</h3><p>Soft, funny, and genuinely special.</p></div><div class="tile"><h3>💌 The memories</h3><p>The moments may be small, but they matter to me.</p></div></div>
+<div style="text-align:center;margin-top:25px"><button class="primary" onclick="next('final')">One last room →</button></div></div></section>
+
+<section class="screen ending" id="final"><div class="inner"><div class="envelope"><div class="seal">💌</div><h1 style="font-size:55px">Dear Hannah,</h1><p>More than words can properly explain.<br>More than this little website can fit into one screen.</p><p>Distance can make things harder, and life can get busy, but it doesn't erase the good memories.</p><p><b>I hope we can talk like before again.</b><br>I hope there are more calls, more random conversations, more memories, and hopefully, someday soon, distance will stop being a thing between us.</p><p class="script" style="font-size:28px">Happy Birthday, Hannah ♡<br>— Shero</p><div class="fireworks">✦ 🎉 ✦ 🎂 ✦</div><div class="endMascot"><svg viewBox="0 0 220 220" class="mascotSvg"><ellipse cx="110" cy="199" rx="68" ry="9" fill="#000" opacity=".08"/><path d="M48 104C43 54 67 22 105 28C145 19 178 53 172 105L165 164C161 190 140 201 110 201C78 201 56 188 53 163Z" fill="#fffdfd" stroke="#4e3544" stroke-width="6"/><path d="M57 73C42 52 54 27 78 25C86 13 106 17 112 31C126 14 150 21 151 39C174 39 182 61 166 77" fill="#fffdfd" stroke="#4e3544" stroke-width="6" stroke-linejoin="round"/><circle cx="82" cy="105" r="6" fill="#3d2835"/><circle cx="138" cy="105" r="6" fill="#3d2835"/><circle cx="69" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><circle cx="151" cy="121" r="10" fill="#f5a6b7" opacity=".75"/><path d="M102 117q8 8 16 0M108 117v12" fill="none" stroke="#4e3544" stroke-width="4" stroke-linecap="round"/><path d="M73 151q37-24 74 0v30q-37 18-74 0z" fill="#f26f9f" stroke="#4e3544" stroke-width="5"/></svg></div><button class="primary" onclick="reply('Happy Birthday, Hannah! 🎂 You made it to the final room. Shero definitely overthought this. 😂💗')">Final message 🐹</button></div></div></section>
+<footer>Made by Shero · password 209 · with too much effort and a suspicious amount of Wi‑Fi drama ♡</footer>
+</main></div>
+<div id="toast" class="toast"></div>
+<script>
+const sections=['home','questions','favorites','room','wifi','love','final'];let unlocked=false;
+function unlock(){if(document.getElementById('pw').value==='209'){unlocked=true;document.getElementById('gate').classList.add('hide');document.getElementById('main').classList.remove('hide');document.getElementById('top').classList.remove('hide');document.getElementById('main').scrollIntoView();update()}else{document.getElementById('err').textContent='Hmm… the tiny mascot says that password is not it. 👀';}}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+function next(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});setTimeout(update,450)}
+function update(){if(!unlocked)return;let y=scrollY+innerHeight*.35,idx=sections.findIndex(id=>{let e=document.getElementById(id);return y>=e.offsetTop&&y<e.offsetTop+e.offsetHeight});if(idx<0)idx=0;document.getElementById('count').textContent=(idx+1)+' / 7';document.getElementById('bar').style.width=((idx+1)/7*100)+'%'}
+function reply(t){document.getElementById('speech').textContent=t;toast(t)}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('on');setTimeout(()=>x.classList.remove('on'),3500)}
+addEventListener('scroll',update);
+</script></body></html>
