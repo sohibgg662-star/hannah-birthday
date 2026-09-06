@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7f2">
+<title>Hannah — 19</title>
+<style>
+:root{
+ --ink:#685b70; --muted:#9b8c9d; --pink:#ff9fc0; --pink2:#ffdce8;
+ --blue:#bde9f7; --lav:#ded0ff; --cream:#fff8ef; --white:#fff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:#fff7f2}
+button{font:inherit}
+#app{position:fixed;inset:0;overflow:hidden}
+.scene{
+ position:absolute;inset:0;display:none;overflow:hidden;
+ background:linear-gradient(135deg,#fff9f4 0%,#fff3f7 45%,#eef9ff 100%);
+}
+.scene.active{display:block;animation:enter .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes enter{from{opacity:0;transform:scale(1.02)}to{opacity:1;transform:none}}
+.scene:after{
+ content:"";position:absolute;inset:auto 0 0;height:22%;
+ background:linear-gradient(transparent,#fff9 80%);pointer-events:none;
+}
+.bgshape{position:absolute;border-radius:50%;filter:blur(3px);opacity:.65;pointer-events:none}
+.s1{width:38vw;height:38vw;left:-13vw;top:-12vw;background:#ffdce8}
+.s2{width:31vw;height:31vw;right:-10vw;bottom:-10vw;background:#d9f3ff}
+.s3{width:20vw;height:20vw;left:45%;top:3%;background:#e7ddff}
+.cloud{
+ position:absolute;width:150px;height:45px;border-radius:50px;background:#fff;
+ opacity:.7;filter:drop-shadow(0 10px 16px #8e779d15);
+ animation:cloud 22s linear infinite;pointer-events:none
+}
+.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:#fff}
+.cloud:before{width:65px;height:65px;left:25px;bottom:8px}.cloud:after{width:78px;height:78px;left:72px;bottom:3px}
+.cloud.a{top:13%;left:-180px}.cloud.b{top:65%;left:-240px;animation-delay:-10s;transform:scale(.7)}
+@keyframes cloud{to{left:115%}}
+.spark{
+ position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;
+ box-shadow:0 0 12px #fff;animation:spark 2.5s ease-in-out infinite;pointer-events:none
+}
+@keyframes spark{50%{opacity:.25;transform:scale(.55)}}
+.top{
+ position:absolute;z-index:30;top:max(15px,env(safe-area-inset-top));left:22px;right:22px;
+ display:flex;align-items:center;justify-content:space-between
+}
+.logo{font-size:13px;letter-spacing:.15em;font-weight:1000;color:#846d86}
+.progress{display:flex;gap:5px}.p{width:7px;height:7px;border-radius:50%;background:#e8d7df}.p.done{background:#ff91b6}
+.content{
+ position:absolute;z-index:20;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:min(900px,92vw);text-align:center
+}
+.eyebrow{font-size:12px;font-weight:1000;letter-spacing:.18em;color:#aa8fa5;text-transform:uppercase}
+h1{font-size:clamp(42px,8vw,78px);line-height:.94;letter-spacing:-.045em;margin:10px 0;color:#755e78}
+h2{font-size:clamp(28px,5vw,52px);line-height:1;margin:8px 0;color:#755e78}
+p{font-size:clamp(15px,2vw,18px);line-height:1.55;margin:10px auto;max-width:700px}
+.card{
+ background:#ffffffd9;border:2px solid #fff;border-radius:28px;
+ box-shadow:0 24px 70px #816a831c,0 6px 20px #ffb2cd18;
+ padding:22px;backdrop-filter:blur(10px)
+}
+.speech{
+ width:min(620px,88vw);margin:16px auto;padding:16px 20px;background:#fff;
+ border:2px solid #ffd3e2;border-radius:24px;box-shadow:0 12px 30px #816a8318;
+ font-size:18px;line-height:1.45
+}
+.speech b{color:#ff78a8}
+.btn{
+ border:2px solid #ffabc8;background:linear-gradient(135deg,#fff,#ffe6f0);
+ color:#6d5a70;border-radius:999px;padding:13px 23px;font-weight:1000;
+ box-shadow:0 10px 24px #ff9fbd2b;transition:.2s;cursor:pointer
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 15px 28px #ff9fbd3b}
+.btn:active{transform:translateY(1px)}
+.btn.blue{border-color:#b9deef;background:linear-gradient(135deg,#fff,#eafaff)}
+.row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:17px}
+.note{
+ position:absolute;z-index:22;background:#fff;border:2px dashed #ffc1d5;border-radius:18px;
+ padding:9px 13px;font-size:12px;font-weight:900;color:#9a738a;box-shadow:0 8px 18px #8b718015;
+ animation:note 4s ease-in-out infinite
+}
+@keyframes note{50%{transform:translateY(-6px)rotate(2deg)}}
+
+/* original vector characters */
+.shero{position:absolute;z-index:9;left:5vw;bottom:5vh;width:185px;height:245px;animation:bob 3.5s ease-in-out infinite}
+.mascot{position:absolute;z-index:9;right:5vw;bottom:7vh;width:155px;height:160px;animation:bob 3s ease-in-out infinite reverse}
+@keyframes bob{50%{transform:translateY(-9px)}}
+.head{position:absolute}.shero .face{left:35px;top:25px;width:115px;height:105px;background:#f4c9a6;border-radius:48% 48% 44% 44%;box-shadow:inset 0 -6px #e8b68c}
+.shero .hair{position:absolute;left:27px;top:14px;width:130px;height:68px;background:#645468;border-radius:60% 58% 35% 45%;transform:rotate(-5deg)}
+.shero .eye{position:absolute;top:67px;width:8px;height:12px;background:#5c5161;border-radius:50%;z-index:2}.shero .e1{left:61px}.shero .e2{left:106px}
+.shero .mouth{position:absolute;left:79px;top:87px;width:25px;height:12px;border-bottom:3px solid #a66c7b;border-radius:50%;z-index:2}
+.shero .body{position:absolute;left:24px;top:128px;width:138px;height:100px;background:#a8d8ec;border-radius:35px 35px 23px 23px}
+.shero .heart{position:absolute;z-index:2;left:80px;top:157px;color:#ff8fb3;font-size:24px}
+.shero .arm{position:absolute;z-index:3;top:151px;width:52px;height:19px;background:#f4c9a6;border-radius:20px}.shero .a1{left:0;transform:rotate(20deg)}.shero .a2{right:-2px;transform:rotate(-24deg)}
+.mascot .ear{position:absolute;z-index:1;top:2px;width:46px;height:52px;background:#fff;border:5px solid #e5d5de;border-radius:50%}.mascot .ear1{left:21px;transform:rotate(-18deg)}.mascot .ear2{right:21px;transform:rotate(18deg)}
+.mascot .face{position:absolute;z-index:2;left:15px;top:31px;width:125px;height:116px;background:#fff;border:5px solid #e5d5de;border-radius:48% 48% 45% 45%;box-shadow:0 13px 25px #806a8315}
+.mascot .eye{position:absolute;top:67px;width:7px;height:10px;background:#62566a;border-radius:50%}.mascot .e1{left:56px}.mascot .e2{left:91px}
+.mascot .cheek{position:absolute;top:84px;width:17px;height:8px;background:#ffb6ca;border-radius:50%}.mascot .c1{left:32px}.mascot .c2{right:32px}
+.mascot .mouth{position:absolute;left:74px;top:82px;width:13px;height:8px;border-bottom:2px solid #62566a;border-radius:50%}
+
+/* room */
+.room{
+ position:absolute;inset:14% 6% 7%;border-radius:35px;
+ background:linear-gradient(180deg,#fffdf9,#fff1f6);border:3px solid #fff;
+ box-shadow:inset 0 0 0 2px #ffe2ec,0 25px 70px #8d74891b
+}
+.window{position:absolute;right:8%;top:10%;width:180px;height:125px;border:8px solid #fff;border-radius:20px;background:linear-gradient(#dff5ff,#fff1d8);box-shadow:0 7px 18px #816a8315}
+.window:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:4px solid #fff}.window:after{content:"";position:absolute;top:50%;left:0;right:0;border-top:4px solid #fff}
+.table{position:absolute;left:8%;bottom:11%;width:38%;height:18px;border-radius:20px;background:#d6a883}.table:after{content:"";position:absolute;left:12%;right:12%;top:16px;height:55px;border-left:9px solid #c18d6d;border-right:9px solid #c18d6d}
+.cup{position:absolute;left:23%;bottom:17%;width:52px;height:44px;border:6px solid #b77f63;border-radius:8px 8px 16px 16px;background:#fff}.cup:after{content:"";position:absolute;right:-22px;top:8px;width:20px;height:20px;border:5px solid #b77f63;border-left:0;border-radius:0 14px 14px 0}
+.steam{position:absolute;left:29%;bottom:29%;width:7px;height:35px;border-left:3px dotted #cbb0ad;transform:rotate(8deg)}
+.poster{position:absolute;left:8%;top:12%;padding:17px 25px;border-radius:18px;background:#ffe0eb;transform:rotate(-3deg);font-weight:1000;color:#956d82;box-shadow:0 10px 20px #816a8312}
+
+/* map */
+.map{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px auto;max-width:850px}
+.node{min-height:105px;text-align:left;padding:15px;border-radius:22px;border:2px solid #f1d7e1;background:#fff;color:#6d5b70;box-shadow:0 9px 20px #806a8310;cursor:pointer;transition:.2s}
+.node:hover{transform:translateY(-3px);background:#fff7fa}.node.lock{opacity:.42;cursor:not-allowed}
+.node strong{display:block;font-size:16px;color:#785f79;margin-bottom:6px}.node small{color:#9b8d9e;line-height:1.35}.tag{float:right;font-size:10px;color:#ff82ac}
+@media(max-width:650px){.map{grid-template-columns:repeat(2,1fr);gap:8px}.node{min-height:88px;padding:11px}.node strong{font-size:14px}.node small{font-size:11px}.shero{left:-18px;bottom:2vh;transform:scale(.62)}.mascot{right:-12px;bottom:4vh;transform:scale(.58)}}
+
+/* quiz */
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;max-width:720px;margin:18px auto}.answer{padding:16px;border-radius:20px;border:2px solid #f1d4df;background:#fff;color:#6d5b70;font-weight:900;cursor:pointer;transition:.2s}.answer:hover{transform:translateY(-2px);background:#fff3f7}.feedback{min-height:26px;font-weight:900;color:#ff78a8}
+
+/* games */
+.game{height:290px;width:min(760px,90vw);margin:15px auto;position:relative;border-radius:28px;border:3px solid #fff;background:linear-gradient(#eefaff,#fff4f8);overflow:hidden;box-shadow:inset 0 0 0 2px #dff0f4}
+.bean{position:absolute;top:-35px;width:24px;height:34px;border-radius:50%;background:#a87857;border:0;box-shadow:inset -5px -4px #81563f;cursor:pointer;animation:drop 2.5s linear forwards}.bean:after{content:"";position:absolute;left:9px;top:4px;height:25px;border-left:2px solid #d6ad8f;transform:rotate(18deg)}
+@keyframes drop{to{top:320px;transform:rotate(450deg)}}
+.cupbig{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);width:82px;height:70px;border:8px solid #b77f63;border-radius:12px 12px 25px 25px;background:#fff}.cupbig:after{content:"";position:absolute;right:-35px;top:12px;width:31px;height:30px;border:8px solid #b77f63;border-left:0;border-radius:0 22px 22px 0}
+.horror{background:radial-gradient(circle at 50% 45%,#76647e,#393448 70%,#292638);color:#fff}.horror h2,.horror p,.horror .eyebrow{color:#fff}
+.film{width:min(720px,88vw);height:230px;margin:18px auto;background:#171521;border:8px solid #817182;border-radius:12px;display:grid;place-items:center;box-shadow:0 25px 70px #0005;position:relative;overflow:hidden}.film:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#fff0 0 8px,#fff1 9px 10px);animation:scan 1s linear infinite}@keyframes scan{to{transform:translateY(10px)}}
+
+/* flowers */
+.garden{height:290px;max-width:760px;margin:16px auto;border-radius:30px;position:relative;overflow:hidden;background:linear-gradient(#f5ecff 0 48%,#dff6e9 49%);border:3px solid #fff}
+.flower{position:absolute;border:0;background:none;color:#ff8fb5;font-size:35px;cursor:pointer;transition:.25s}.flower:hover{transform:scale(1.15)}.flower.picked{transform:scale(1.4);opacity:.35}
+
+/* sea */
+.sea{background:linear-gradient(#ffe7ca 0%,#ffdfe9 34%,#cceeff 60%,#9bd9ec 100%)}.sun{position:absolute;right:12%;top:15%;width:125px;height:125px;border-radius:50%;background:#fff1aa;box-shadow:0 0 65px #fff1aa}.waves{position:absolute;left:-5%;right:-5%;bottom:-2%;height:150px;background:#ffffff88;border-radius:50% 50% 0 0/35% 35% 0 0;animation:wav 5s ease-in-out infinite}.waves.two{bottom:60px;opacity:.5;animation-delay:-2s}@keyframes wav{50%{transform:translateX(-2%) translateY(-7px)}}
+
+/* letter */
+.paper{max-height:63vh;overflow:auto;text-align:left;line-height:1.85;padding:22px 24px}.envelope{width:250px;height:160px;margin:20px auto;background:#ffd4e3;border-radius:16px;position:relative;box-shadow:0 22px 50px #806a8320;cursor:pointer;border:3px solid #fff}.envelope:before{content:"";position:absolute;inset:0;border-left:125px solid transparent;border-right:125px solid transparent;border-top:88px solid #ffb5ce}.seal{position:absolute;z-index:4;left:50%;top:60px;transform:translateX(-50%);width:45px;height:45px;border-radius:50%;background:#fff;border:3px solid #ff94b7;display:grid;place-items:center;color:#ff78a8;font-weight:1000}
+
+/* future */
+.future{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:780px;margin:20px auto}.future .answer{min-height:125px}
+
+/* final + secret */
+.night{background:linear-gradient(#d8d0ef,#e8ddf4 45%,#ffe8d4 100%)}.night .star{background:#fff}.bigheart{font-size:70px;color:#ff91b5;animation:heart 1.4s ease-in-out infinite}@keyframes heart{50%{transform:scale(1.12)}}
+.pad{display:grid;grid-template-columns:repeat(3,62px);gap:8px;justify-content:center;margin:15px}.key{height:53px;border:2px solid #dfcfe6;background:#fff;border-radius:17px;color:#6e5b70;font-weight:1000;cursor:pointer}.code{height:35px;letter-spacing:10px;font-size:23px}
+.achievements{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-top:12px}.ach{padding:7px 11px;border-radius:999px;background:#fff;border:2px solid #ffd2e1;font-size:11px;font-weight:900;color:#8c6b82}
+.confetti{position:fixed;z-index:100;top:-25px;width:9px;height:18px;border-radius:4px;animation:conf 3.2s linear forwards}@keyframes conf{to{top:110%;transform:rotate(720deg) translateX(100px)}}
+.hidden{display:none!important}
+@media(max-width:650px){h1{font-size:45px}.content{width:93vw}.card{padding:17px}.speech{font-size:15px}.answers,.future{grid-template-columns:1fr 1fr}.future .answer{min-height:100px;padding:12px}.room{inset:12% 3% 5%}.window{right:4%;top:9%;transform:scale(.75);transform-origin:top right}.poster{left:4%;top:11%;font-size:12px}.table{left:6%;width:55%}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const app=document.getElementById("app");
+let logoClicks=0;
+document.addEventListener("click",e=>{
+ if(e.target && e.target.classList && e.target.classList.contains("logo")){
+   logoClicks++;
+   if(logoClicks===3) toast("You found a suspiciously clickable logo. 👀");
+   if(logoClicks===5){award("Logo Menace");toast("Achievement: Logo Menace 😂");}
+ }
+});
+let unlocked=1, achievements=[], quiz=0, flowers=0, beans=0, wifi=5, code="", futureChosen=false;
+const names=["Waiting","Birthday Room","Map","Quiz","Memory","Wi-Fi","Love","Garden","Coffee","Album","Sea","Future","Letter","Finale","Secret"];
+
+function bg(){
+ return `<div class="bgshape s1"></div><div class="bgshape s2"></div><div class="bgshape s3"></div><div class="cloud a"></div><div class="cloud b"></div>`+
+ Array.from({length:17},(_,i)=>`<i class="spark" style="left:${(i*43)%97}%;top:${(i*31)%87}%;animation-delay:${(i%8)*.25}s"></i>`).join("");
+}
+function makeScene(n,cls=""){
+ app.insertAdjacentHTML("beforeend",`<section class="scene ${cls}" id="scene${n}">${bg()}<div class="top"><div class="logo">HANNAH • 19</div><div class="progress">${Array.from({length:15},(_,i)=>`<i class="p" id="p${i}"></i>`).join("")}</div></div><div class="content"></div></section>`);
+}
+function go(n){document.querySelectorAll(".scene").forEach((s,i)=>s.classList.toggle("active",i===n-1));unlocked=Math.max(unlocked,n);for(let i=0;i<15;i++)document.getElementById("p"+i).classList.toggle("done",i<n);if(n===3)renderMap()}
+function award(x){if(!achievements.includes(x)){achievements.push(x);toast("Achievement unlocked — "+x)}}
+function toast(t){let x=document.createElement("div");x.textContent=t;x.style="position:fixed;z-index:200;left:50%;top:24px;transform:translateX(-50%);background:#fff;border:2px solid #ffd0df;border-radius:999px;padding:12px 17px;font-weight:900;color:#7b6279;box-shadow:0 12px 30px #806a8325;white-space:nowrap";document.body.appendChild(x);setTimeout(()=>x.remove(),2200)}
+function confetti(){for(let i=0;i<55;i++){let x=document.createElement("i");x.className="confetti";x.style.left=Math.random()*100+"%";x.style.background=["#ffabc8","#cbb8ff","#aee2f2","#ffe19d"][i%4];x.style.animationDelay=Math.random()*1.3+"s";document.body.appendChild(x);setTimeout(()=>x.remove(),4300)}}
+
+/* 1 */
+makeScene(1);
+document.querySelector("#scene1 .content").innerHTML=`
+<div class="eyebrow">SEPTEMBER 9 • A VERY IMPORTANT DELIVERY</div>
+<h1>Hey, Hannah…</h1>
+<div class="speech" id="intro"><b>Shero:</b> “Psst… is she here yet?”</div>
+<p id="introSub">Two tiny characters have been waiting for the birthday girl.</p>
+<div class="row"><button class="btn" id="start">Open it ♡</button></div>
+<div id="chaosHint" style="margin-top:10px;font-size:11px;color:#b294a8;font-weight:900;min-height:18px"></div>
+<div class="note" style="left:8%;top:20%">birthday mission</div><div class="note" style="right:8%;top:24%;transform:rotate(4deg)">do not panic</div>
+<div class="shero"><div class="hair"></div><div class="face"><i class="eye e1"></i><i class="eye e2"></i><i class="mouth"></i></div><div class="body"></div><div class="heart">♥</div><i class="arm a1"></i><i class="arm a2"></i></div>
+<div class="mascot"><i class="ear ear1"></i><i class="ear ear2"></i><div class="face"><i class="eye e1"></i><i class="eye e2"></i><i class="cheek c1"></i><i class="cheek c2"></i><i class="mouth"></i></div></div>`;
+let introStep=0;
+document.getElementById("start").onclick=()=>{
+ introStep++;
+ if(introStep===1){document.getElementById("intro").innerHTML='<b>Little friend:</b> “She’s here! Act normal.”';document.getElementById("introSub").textContent="Shero: “I am acting normal.” He is absolutely not."}
+ else if(introStep===2){document.getElementById("intro").innerHTML='<b>Shero:</b> “Hannah, this little world is yours for today.”';document.getElementById("introSub").textContent="No rush. Look around. There are secrets."}
+ else {document.getElementById("chaosHint").textContent="Shero.exe: successfully pretending to be calm.";award("First Step");go(2)}
+};
+
+/* 2 */
+makeScene(2);
+document.querySelector("#scene2 .content").innerHTML=`
+<div class="room">
+ <div class="poster">HAPPY BIRTHDAY<br><span style="font-size:24px">HANNAH ♡</span></div>
+ <div class="window"></div><div class="table"></div><div class="cup"></div><div class="steam"></div>
+</div>
+<div style="position:relative;z-index:25;margin-top:7vh"><div class="eyebrow">SCENE 02 • THE BIRTHDAY ROOM</div><h1>19 looks good on you.</h1>
+<div class="speech">Today is not allowed to be ordinary.<br><small style="color:#ad8b9f;font-weight:900">The birthday department has rejected “just a normal message.” 😂</small></div>
+<button class="btn" id="enter">Enter the journey ✦</button></div>`;
+document.getElementById("enter").onclick=()=>{
+ award("Birthday Door");
+ const b=document.getElementById("enter"); b.disabled=true; b.textContent="Loading Hannah's patience… 3%";
+ let n=3; const t=setInterval(()=>{n+=Math.floor(Math.random()*28)+8;if(n>=100){n=100;clearInterval(t);b.textContent="Loading complete ✦";setTimeout(()=>go(3),350)}else b.textContent="Loading Hannah's patience… "+n+"%";},220);
+};
+
+/* 3 */
+makeScene(3);
+document.querySelector("#scene3 .content").innerHTML=`<div class="eyebrow">SCENE 03 • YOUR MAP</div><h2>Choose a glowing stop.</h2><p>Finish each little chapter to reveal the next one.</p>
+<div class="speech" style="font-size:13px;padding:10px">⚠️ Important: clicking everything is encouraged. The developers cannot be stopped.</div>
+<div class="map" id="map"></div><div class="achievements" id="ach"></div>`;
+const nodes=[
+["Hannah Quiz","Coffee, Roblox & memories.",4],["Horror Memory","A scary movie became sweet.",5],["Wi-Fi Boss","The internet's villain arc.",6],
+["Things I Love","Four tiny reasons.",7],["Flower Garden","Collect seven flowers.",8],["Coffee Rush","Catch the beans.",9],
+["Memory Album","Three little moments.",10],["Across the Sea","A softer kind of distance.",11],["Future Room","Pick a little wish.",12],
+["The Letter","Open slowly.",13],["Final Night","Look at the stars.",14],["Secret 209","You know the code.",15]
+];
+function renderMap(){
+ const m=document.getElementById("map");if(!m)return;m.innerHTML="";
+ nodes.forEach((x,i)=>{let open=unlocked>=x[2]-1;let b=document.createElement("button");b.className="node "+(open?"":"lock");b.innerHTML=`<span class="tag">${open?"OPEN":"LOCKED"}</span><strong>${x[0]}</strong><small>${x[1]}</small>`;b.onclick=()=>open?go(x[2]):toast("Complete the earlier chapter first ♡");m.appendChild(b)});
+ document.getElementById("ach").innerHTML=achievements.map(a=>`<span class="ach">✦ ${a}</span>`).join("")||'<span class="eyebrow">Achievements appear as you explore.</span>';
+}
+
+/* 4 */
+makeScene(4);
+document.querySelector("#scene4 .content").innerHTML=`<div class="eyebrow">SCENE 04 • NO CHEATING</div><h2 id="q"></h2><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div>`;
+const qs=[
+["What drink does Hannah love?",["Coffee","Soup","Air","Water"],0],
+["Which game does Shero play with her?",["Roblox","Chess","Tetris","Golf"],0],
+["What was the first song Shero heard from her?",["My Flower Girl","Stand By Me","A ringtone","The Wi-Fi anthem"],0],
+["What became a sweet memory after watching it together?",["Our first horror movie","A cooking show","A documentary","A football match"],0]
+];
+function loadQuiz(){
+ let q=qs[quiz];document.getElementById("q").textContent=q[0];let a=document.getElementById("answers");a.innerHTML="";document.getElementById("feedback").textContent="";
+ q[1].forEach((v,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=v;b.onclick=()=>{document.getElementById("feedback").textContent=i===q[2]?["Correct. The birthday committee approves. ♡","Correct. Shero is taking notes. ✍️","Correct. +10 Hannah points.","Correct. You have defeated the quiz goblin. 😂"][quiz]:"Suspicious answer. The tiny committee is staring at you. 👁️👁️";setTimeout(()=>{quiz++;if(quiz<4)loadQuiz();else{award("Hannah Scholar");go(5)}},650)};a.appendChild(b)})
+}
+loadQuiz();
+
+/* 5 */
+makeScene(5,"horror");
+document.querySelector("#scene5 .content").innerHTML=`<div class="eyebrow">SCENE 05 • MEMORY REEL</div><h2>The first horror movie we watched together.</h2><div class="film"><div><div style="font-size:45px;color:#fff">○</div><b style="color:#fff">THE MOVIE WE SURVIVED</b><p style="font-size:13px;color:#eee">The movie was scary.<br>The memory became sweet.</p></div></div><button class="btn" id="survive">I survived. Barely. →</button>`;
+document.getElementById("survive").onclick=()=>{award("Horror Survivor");go(6)};
+
+/* 6 */
+makeScene(6);
+document.querySelector("#scene6 .content").innerHTML=`<div class="eyebrow">SCENE 06 • BOSS BATTLE</div><h2>THE WI-FI INCIDENT.</h2><div style="font-size:90px;line-height:1" id="router">◉</div><p>On the day Shero confessed, the internet decided to disconnect at the worst possible moment. Unforgivable behavior.</p><div class="card"><b>ROUTER HP: <span id="hp">5</span>/5</b><div class="row"><button class="btn" id="hit">Defeat the router</button><button class="btn blue" id="warn">Give it one warning</button></div><div class="feedback" id="wifiMsg"></div></div>`;
+document.getElementById("hit").onclick=()=>{if(wifi>0){wifi--;document.getElementById("hp").textContent=wifi;document.getElementById("wifiMsg").textContent=["Router: “Please stop.”","Router: “I have a family.”","Router: “This is workplace bullying.”","Router: “I regret everything.”","Router: “NOOOOO.”"][5-wifi];document.getElementById("router").style.transform="rotate(8deg)";setTimeout(()=>document.getElementById("router").style.transform="",150);if(wifi===0){award("Wi-Fi Survivor");document.getElementById("wifiMsg").textContent="ROUTER DEFEATED. Justice. Finally. 😂";setTimeout(()=>go(7),800)}}};
+document.getElementById("warn").onclick=()=>document.getElementById("wifiMsg").textContent="Shero: “I forgive you. I do not forget.”";
+
+/* 7 */
+makeScene(7);
+document.querySelector("#scene7 .content").innerHTML=`<div class="eyebrow">SCENE 07 • FOUR LITTLE THINGS</div><h2>Things Shero loves about Hannah.</h2><div class="map" style="max-width:700px"><button class="node love" data-t="Your voice"><strong>VOICE</strong><small>A sound that can make an ordinary day softer.</small></button><button class="node love" data-t="Your eyes"><strong>EYES</strong><small>The detail that makes Shero forget what he was saying.</small></button><button class="node love" data-t="Your laugh"><strong>LAUGH</strong><small>A little chaos. A lot of happiness.</small></button><button class="node love" data-t="Your style"><strong>STYLE</strong><small>Effortless. Pretty. Very Hannah.</small></button></div><div class="speech" id="loveText">Click all four. We have time. ♡</div>`;
+let loves=0;document.querySelectorAll(".love").forEach(b=>b.onclick=()=>{if(!b.classList.contains("picked")){b.classList.add("picked");loves++;document.getElementById("loveText").innerHTML="<b>"+b.dataset.t+"</b><br>"+b.querySelector("small").textContent;if(loves===4){award("Soft Heart");setTimeout(()=>go(8),700)}}});
+
+/* 8 */
+makeScene(8);
+document.querySelector("#scene8 .content").innerHTML=`<div class="eyebrow">SCENE 08 • LITTLE GARDEN</div><h2>Collect seven flowers.</h2><p>Flowers and the sea are two of the little things that remind Shero of Hannah.</p><div class="garden" id="garden"></div><div class="feedback" id="flowerMsg">Flowers: 0 / 7</div>`;
+const garden=document.getElementById("garden");
+for(let i=0;i<7;i++){let f=document.createElement("button");f.className="flower";f.textContent="✿";f.style.left=(7+(i*13)%84)+"%";f.style.top=(25+(i*29)%58)+"%";f.onclick=()=>{if(!f.classList.contains("picked")){f.classList.add("picked");flowers++;document.getElementById("flowerMsg").textContent="Flowers: "+flowers+" / 7";if(flowers===7){award("Flower Keeper");setTimeout(()=>go(9),700)}}};garden.appendChild(f)}
+
+/* 9 */
+makeScene(9);
+document.querySelector("#scene9 .content").innerHTML=`<div class="eyebrow">SCENE 09 • COFFEE RUSH</div><h2>Coffee mode: activated.</h2><p>Catch eight beans before they disappear.</p><div class="game" id="coffee"><div class="cupbig"></div></div><div class="feedback">Beans caught: <span id="beans">0</span> / 8</div>`;
+const coffee=document.getElementById("coffee");
+let coffeeTimer=setInterval(()=>{if(document.getElementById("scene9").classList.contains("active")&&beans<8){let b=document.createElement("button");b.className="bean";b.style.left=(5+Math.random()*90)+"%";b.onclick=()=>{beans++;document.getElementById("beans").textContent=beans;b.remove();if(beans===8){award("Coffee Certified");setTimeout(()=>go(10),700)}};coffee.appendChild(b);setTimeout(()=>b.remove(),2600)}},470);
+
+/* 10 */
+makeScene(10);
+document.querySelector("#scene10 .content").innerHTML=`<div class="eyebrow">SCENE 10 • MEMORY ALBUM</div><h2>Three little moments.</h2><div class="map" style="grid-template-columns:repeat(3,1fr)"><div class="card"><div style="font-size:44px;color:#7dbedb">▣</div><b>Roblox nights</b><p style="font-size:13px">Games, chaos, and “one more round.”</p></div><div class="card"><div style="font-size:44px;color:#9b7ca5">◐</div><b>The horror movie</b><p style="font-size:13px">A scary movie turned into a sweet memory.</p></div><div class="card"><div style="font-size:44px;color:#ff91b5">✿</div><b>My Flower Girl</b><p style="font-size:13px">The first song Shero heard from Hannah.</p></div></div><button class="btn" id="album">Next memory →</button>`;
+document.getElementById("album").onclick=()=>{award("Memory Keeper");go(11)};
+
+/* 11 */
+makeScene(11,"sea");
+document.querySelector("#scene11").insertAdjacentHTML("beforeend",`<div class="sun"></div><div class="waves"></div><div class="waves two"></div>`);
+document.querySelector("#scene11 .content").innerHTML=`<div class="eyebrow">SCENE 11 • ACROSS THE SEA</div><h2>Distance is a place, not a feeling.</h2><div class="card"><p>Hannah can be busy. Sometimes Shero wishes there were more calls, more conversations, and more time to know each other like before.</p><p>But being in different countries does not make the care smaller.</p></div><div class="row"><button class="btn" id="seaNext">Make the distance smaller →</button></div>`;
+document.getElementById("seaNext").onclick=()=>{award("Distance Doesn't Win");go(12)};
+
+/* 12 */
+makeScene(12);
+document.querySelector("#scene12 .content").innerHTML=`<div class="eyebrow">SCENE 12 • FUTURE SIMULATOR</div><h2>Choose one little wish.</h2><div class="future"><button class="answer fut">More calls<br><small>More stories. More time.</small></button><button class="answer fut">More Roblox<br><small>More chaos. Obviously.</small></button><button class="answer fut">No screen between us<br><small>Just one ordinary day together.</small></button></div><div class="speech" id="futureText">The stars are listening.</div><button class="btn hidden" id="letterBtn">Continue to the letter →</button>`;
+document.querySelectorAll(".fut").forEach((b,i)=>b.onclick=()=>{futureChosen=true;document.getElementById("futureText").innerHTML=["<b>More calls.</b> More little details about each other.","<b>More games.</b> More ridiculous “last rounds” that become five.","<b>One day.</b> No distance. No screen. Just being there."][i];document.getElementById("letterBtn").classList.remove("hidden");award("Future Builder")});
+document.getElementById("letterBtn").onclick=()=>go(13);
+
+/* 13 */
+makeScene(13);
+document.querySelector("#scene13 .content").innerHTML=`<div class="eyebrow">SCENE 13 • FOR HANNAH</div><h2>Open when you're ready.</h2><div class="envelope" id="env"><div class="seal">♥</div></div><div class="card paper hidden" id="letter"><p>Hannah,</p><p>Happy 19th birthday.</p><p>I wanted to make you something that felt like more than a message on a screen. Something you could wander through, laugh at, and keep as a little memory.</p><p>I still remember the first song I heard from you — <i>My Flower Girl</i>. And I remember our first horror movie too. Somehow something scary became one of those memories that feels sweet when I look back.</p><p>I know you can be busy, and sometimes I really wish we could talk like before — call more, laugh more, and keep discovering the little things that make you you.</p><p>I love your voice, your eyes, your laugh, and your style. Flowers, the sea, coffee, games — random things can suddenly remind me of you.</p><p>And yes, I still remember the day I confessed. My internet choosing that exact moment to disappear is still one of my biggest betrayals. I wish I could go back and do that moment again properly.</p><p>Even with the distance, I want to do everything I can so you never feel like you're alone on the other side of it.</p><p>And I really hope that in the near future, you will be with me, and distance will be something we used to talk about instead of something between us.</p><p><b>I love you more than this little website could ever explain.</b></p><p>— Shero ♡</p></div><button class="btn hidden" id="finalLetter">Keep going →</button>`;
+document.getElementById("env").onclick=()=>{document.getElementById("env").classList.add("hidden");document.getElementById("letter").classList.remove("hidden");document.getElementById("finalLetter").classList.remove("hidden");award("Letter Opener")};
+document.getElementById("finalLetter").onclick=()=>go(14);
+
+/* 14 */
+makeScene(14,"night");
+document.querySelector("#scene14 .content").innerHTML=`<div class="bigheart">♥</div><div class="eyebrow">SCENE 14 • LOOK UP</div><h1>Happy 19th, Hannah.</h1><div class="card"><p>May this year bring you soft mornings, good coffee, ridiculous laughter, beautiful surprises, and more moments that feel like home.</p><p><b>Until distance feels a little smaller…</b></p>
+<p style="font-size:12px;color:#9d849b">P.S. If you found every secret, please pretend Shero planned all of them. 😂</p></div><div class="row"><button class="btn" id="secret">One last secret ♡</button><a class="btn blue" href="https://www.youtube.com/results?search_query=Ben+E.+King+Stand+By+Me+official" target="_blank" rel="noopener">Play “Stand By Me” ↗</a></div>`;
+document.getElementById("secret").onclick=()=>{confetti();award("Made It To The Stars");go(15)};
+
+/* 15 */
+makeScene(15);
+document.querySelector("#scene15 .content").innerHTML=`<div class="eyebrow">SCENE 15 • TOP SECRET</div><h2>The secret file.</h2><p>There is one code hidden in the story. You already know it.</p><div class="card"><div class="code" id="code">•••</div><div class="pad">${[1,2,3,4,5,6,7,8,9,0].map(n=>`<button class="key" data-n="${n}">${n}</button>`).join("")}</div><div class="feedback" id="secretMsg"></div></div><div class="row"><button class="btn" id="again">Start again ♡</button></div>`;
+document.querySelectorAll(".key").forEach(k=>k.onclick=()=>{if(code.length<3){code+=k.dataset.n;document.getElementById("code").textContent=code.replace(/./g,"•");if(code.length===3){if(code==="209"){award("Secret 209");document.getElementById("secretMsg").innerHTML="<b>ACCESS GRANTED.</b><br>Hannah is officially the main character.<br><span style='font-size:12px'>Shero's secret report: 100% worth it.</span>";confetti()}else{document.getElementById("secretMsg").textContent="Wrong code. The tiny security team is disappointed. 😂";setTimeout(()=>{code="";document.getElementById("code").textContent="•••"},800)}}}});
+document.getElementById("again").onclick=()=>location.reload();
+
+go(1);
+</script>
+</body>
+</html>
